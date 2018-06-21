@@ -1,0 +1,35 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/user/user",
+        "pages/info/info",
+        "pages/couponList/couponList"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "丰盛微课堂",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "list": [{
+            "pagePath": "pages/index/index",
+            "text": "课程",
+            "iconPath": "./static/img/course.png",
+            "color": "#666666",
+            "selectedColor": "#00AA66",
+            "selectedIconPath": "./static/img/course_active.png"
+        }, {
+            "pagePath": "pages/user/user",
+            "text": "我的",
+            "iconPath": "./static/img/user.png",
+            "color": "#666666",
+            "selectedColor": "#00AA66",
+            "selectedIconPath": "./static/img/user_active.png"
+        }]
+    },
+    "networkTimeout": {
+        "request": 10000,
+        "downloadFile": 10000
+    }
+}

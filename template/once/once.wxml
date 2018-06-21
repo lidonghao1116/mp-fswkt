@@ -1,0 +1,61 @@
+<template name="once">
+    <view class="coupon-box font-extra-sm" catchtap="closeCoupon1" data-close='1'> 
+        <view class="main">
+            <view class="head">
+                <image src="http://fengsheng-image.oss-cn-shenzhen.aliyuncs.com/sys/share-logo.jpg" class="icon" />
+            </view>
+            <view class="coupon" wx-if="{{!hasGotCoupon}}"   bindtap="getCoupon1">
+                <view class="item1">丰盛微课堂</view>
+                <view class="item2">发了一个红包，价值连城</view>
+                <view class="font-lg color-y item3">收到一个</view>
+                <view class="font-lg color-y item4">“全民有文画”的金币礼包</view>
+                <form bindsubmit="formSubmit" bindreset="formReset" report-submit> 
+                    <view class="openBtn-box {{granting?'ani-rotate':''}}">
+                            <button formType="submit" class="open-btn">开</button>
+                    </view>
+                </form>
+                <view>
+                    <text>已经派出</text>
+                    <text class="color-y">103,526</text>
+                    <text>个红包</text>
+                </view>
+                <view>派完为止</view>
+            </view>
+            <view class="coupon" wx-if="{{hasGotCoupon}}">
+                <view class="item1">丰盛微课堂</view>
+                <view class="font-md color-y item5">好幸运！3000金币+5颗还魂丹</view>
+                <view class="font-md color-y item6">
+                    和五张20元个人提升券
+                </view>
+                <view class="info-box font-lg">
+                    <view class="info-box-item1 info-box-item">
+                        <text class="font-ee-sm">￥</text>
+                        <text class="price">{{couponMoney}}</text>
+                    </view>
+                    <view  class="info-box-item2 info-box-item">
+                    </view>
+                    <view  class="info-box-item3 info-box-item">
+                        <view class="ellipsis font-lg">{{desc}}</view>
+                        <view class="font-ee-sm ellipsis">
+                            <text class="bold">已到账{{' '}}</text>
+                            <text>|{{' '}}有效期</text>
+                            <text class="bold">7</text>
+                            <text>天</text>
+                        </view>
+                    </view>
+                    <view class="count">5张</view>
+                </view>
+                <view class="color-y font-extra-sm">为才华充电，新年解锁新技能</view>
+                <view class="btn-group">
+                    <view class="btn1" bindtap="btn1">
+                        领取金币
+                    </view>
+                    <view  class="btn2" bindtap="btn2">
+                        去提升自己
+                    </view>
+                </view>
+            </view>
+            <view class="close-btn" bindtap="closeCoupon"  data-close='2'></view>
+        </view>
+    </view>
+</template>

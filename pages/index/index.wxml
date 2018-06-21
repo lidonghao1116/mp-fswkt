@@ -1,0 +1,47 @@
+<import src='../../template/coupon/coupon.wxml' />
+<import src='../../template/once/once.wxml' />
+<view class="authorization" wx:if="{{showAuthorModal}}">
+  <view class="box">
+    <text>丰盛微课需要使用你的用户信息</text>
+    <button open-type="getUserInfo" plain lang="zh_CN" bindgetuserinfo="onGotUserInfo">确认授权</button>
+  </view>
+</view>
+<!--index.wxml-->
+<view class="backTop-box {{showBackTop?'show':''}}" bindtap="goTop"></view>
+<scroll-view class="container" scroll-top="{{scrollTop}}" scroll-y bindscrolltolower="lower" bindscroll="scroll" scroll-with-animation>
+  <!-- swiper start  -->
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="slide-swiper">
+    <block wx:for="{{imgUrls}}" wx:key="url">
+      <swiper-item>
+        <image src="{{item.img}}" class="slide-image"  mode="widthFix" bindtap="goCourseInfo" data-banner data-id="{{item.cid}}" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <!-- swiper start  -->
+  <!-- 课程列表 start -->
+  <view class="course-box">
+    <view wx:for="{{courseList}}" wx:key="course" class="course-list" bindtap="goCourseInfo" data-id="{{item.cid}}">
+      <view class="course-info border1">
+        <view class="img">
+          <image src="{{item.headImgUrl}}"  />
+        </view>
+        <view class="main">
+          <view class="font-sm ellipsis one bold color-g3">{{item.tname}}-{{item.title}}</view>
+          <view class="color-g6 font-extra-sm ellipsis two">{{item.slogo}}</view>
+          <view class="font-extra-sm bottomBox">
+            <text class="mgr76 color-g3">{{item.orderNum}}订阅</text>
+            <text class="color-r" wx-if="{{item.price != 0}}">￥{{item.price}}</text>
+            <text class="themeColor" wx-if="{{item.price == 0}}">免费</text>
+          </view>
+        </view>
+        <view class="fr nav-right">
+          <text class="right2"></text>
+        </view>
+      </view>
+    </view>
+  </view> 
+  <!-- 课程列表 end -->
+</scroll-view>
+
+<template is="coupon" data="{{...couponData}}" wx:if="{{showCoupon && ready }}"></template>
+<template is="once" data="{{...onceData}}" wx:if="{{showOnce && ready }}"></template>

@@ -1,0 +1,57 @@
+<!--index.wxml-->
+<view class="backTop-box {{showBackTop?'show':''}}" bindtap="goTop"></view>
+<scroll-view class="container" scroll-top="{{scrollTop}}" scroll-y bindscrolltolower="lower" bindscroll="scroll" scroll-with-animation>
+    <!-- 优惠券 start -->
+    <view class="coupon-list-box" wx-if="{{empty === false}}">
+        <view wx:for="{{couponList}}" wx:key="coupon" class="coupon-list">
+            <view class="main-left">
+                <text class="font-ee-sm">￥</text>
+                <text class="price">{{item.fee}}</text>
+            </view>
+            <view class="main-right">
+                <view class="head font-lg">
+                    {{item.title}}
+                </view>
+                <view class="end-time font-extra-sm  color-g6">
+                    <text>有效期至:</text>
+                    <text>{{item.endTime}}</text>
+                    <text class="btn-use" bindtap="goIndex">立即使用</text>
+                </view>
+            </view>
+        </view>
+    </view> 
+    <!-- 优惠券 end -->
+     <!-- 无优惠券 start -->
+    <view class="coupon-list-box empty" wx-if="{{empty === true}}">
+        <view class="empty-info color-g6">
+            <view>
+                暂无优惠券
+            </view>
+            <view>
+                参与互动，获取优惠券
+            </view>
+        </view>
+        <view class="coupon-list">
+            <view class="main-left">
+                <text class="font-ee-sm">￥</text>
+                <text class="price">0</text>
+            </view>
+            <view class="main-right">
+                <view class="head font-lg color-g6">xxx优惠券</view>
+                <view class="end-time font-extra-sm  color-g6">
+                    <text>有效期至:xxxx-xx-xx</text>
+                    <text class="btn-use">立即使用</text>
+                </view>
+            </view>
+        </view>
+    </view> 
+    <!-- 无优惠券 end -->
+
+     <!-- 更多课程 start -->
+    <view class="more-box" wx-if="{{empty === true}}"  bindtap="goIndex">
+        <view class="more-button" >
+           更多课程
+        </view>
+    </view> 
+    <!-- 更多课程 end -->
+</scroll-view>

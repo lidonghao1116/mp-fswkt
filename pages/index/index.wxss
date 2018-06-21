@@ -1,0 +1,162 @@
+/**index.wxss**/
+
+page {
+    height: 100%;
+}
+
+.authorization {
+  position:fixed;
+  height:100%;
+  width:100%;
+  top:0;
+  left:0;
+  background:#4D4D4D;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index: 100;
+  color: #000;
+  font-size: 25rpx;
+}
+.authorization .box {
+  text-align: center;
+  padding: 50rpx;
+  padding-top: 65rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+.authorization button {
+  margin-top: 50rpx;
+  margin-bottom: -20rpx;
+  display: inline-block;
+  border: none;
+  color: #269f42;
+  font-size: 30rpx;
+}
+.container {
+    height: 100%;
+    z-index: 9;
+}
+
+
+/* 返回顶部按钮 start*/
+
+.backTop-box {
+    position: fixed;
+    bottom: 18rpx;
+    right: -90rpx;
+    width: 80rpx;
+    height: 80rpx;
+    z-index: 999;
+    border-radius: 50%;
+    background: url("http://fengsheng-image.oss-cn-shenzhen.aliyuncs.com/sys/top.png") no-repeat center center;
+    background-size: 100%;
+}
+
+.backTop-box.show {
+    animation: backTopShow 0.5s forwards;
+}
+
+@keyframes backTopShow {
+    0% {
+        right: -90rpx;
+    }
+    100% {
+        right: 25rpx;
+    }
+}
+
+
+/* 返回顶部按钮 end*/
+
+
+/*
+  swiper start
+*/
+
+.slide-swiper {
+    width: 750rpx;
+    height: 400rpx;
+}
+
+.slide-image {
+    width: 100%;
+    height: 100%;
+}
+
+
+/*
+  swiper end
+*/
+
+
+/*
+  课程列表 start
+*/
+
+.course-box {}
+
+.course-box .course-list {
+    padding: 30rpx 0 0 30rpx;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.course-box .course-list .img {
+    width: 120rpx;
+    height: 120rpx;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 30rpx;
+}
+
+.course-box .course-list .img image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.course-box .course-list .course-info {
+    display: inline-block;
+    width: 690rpx;
+    height: 120rpx;
+    padding: 0 30rpx 30rpx 0;
+}
+
+.course-box .course-list .course-info .main {
+    display: inline-block;
+    width: 480rpx;
+    height: 100%;
+}
+
+.course-box .course-list .course-info .two {
+    width: 460rpx;
+    margin-top: 8rpx;
+}
+
+.course-box .course-list .course-info .bottomBox {
+    margin-top: 14rpx;
+}
+
+.nav-right {
+    width: 30rpx;
+    height: 120rpx;
+    background: url("http://fengsheng-image.oss-cn-shenzhen.aliyuncs.com/sys/right.png") no-repeat center center;
+    background-size: 20rpx 30rpx;
+}
+
+.nav-right .right {
+    width: 30rpx;
+    height: 150rpx;
+    background: #562;
+}
+
+
+/*
+  课程列表 end
+*/

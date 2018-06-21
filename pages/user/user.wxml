@@ -1,0 +1,60 @@
+<!--index.wxml-->
+<scroll-view class="container" scroll-top="{{scrollTop}}" scroll-y bindscrolltolower="lower" bindscroll="scroll" scroll-with-animation>
+    <view class="user_info">
+        <view class="user_headImg">
+            <image src="{{headImgUrl}}" />
+        </view>
+        <view class="myCourse font-extra-sm">
+            <view class="item">
+                <view>已学习课程</view>
+                <view>
+                    <text class="font-md themeColor mgr10">{{lessonBean.lessonNum}}</text>
+                    <text>节</text>
+                </view>
+            </view>
+            <view class="line"></view>
+            <view class="item">
+                <view >已学习天数</view>
+                <view>
+                    <text  class="font-md themeColor mgr10">{{lessonBean.lessonDays}}</text>
+                    <text>天</text>
+                </view>
+            </view>
+            <view class="line"></view>
+            <navigator  url="/pages/couponList/couponList" >            
+                <view class="item" >
+                    <view >我的优惠券</view>
+                    <view>
+                        <text class="font-md themeColor mgr10">{{couponsNum}}</text>
+                        <text>张</text>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+    </view>
+  <!-- 课程列表 start -->
+  <view class="course-box">
+    <view class="head themeColor font-extra-sm">已购课程</view>
+    <view wx:for="{{courseList}}" wx:key="course" class="course-list" bindtap="goCourseInfo" data-id="{{item.course.cid}}">
+      <view class="course-info border1">
+        <view class="img">
+            <image src="{{item.course.headImgUrl}}"  />
+        </view>
+        <view class="main">
+          <view class="font-sm ellipsis one bold color-g3">{{item.tutor.tname}}-{{item.course.title}}</view>
+          <view class="color-g6 font-extra-sm ellipsis two">{{item.course.title||item.course.slogo}}</view>
+          <view class="font-extra-sm bottomBox three">
+            <text class="mgr76 color-g3">{{item.course.orderNum}}人学过</text>
+            <view class="fr font-extra-sm color-g6" wx:if="{{item.isFinished != 0}}">
+                已学完
+            </view>
+            <view class="fr font-extra-sm themeColor" wx:if="{{item.isFinished == 0}}">
+                未学完
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view> 
+  <!-- 课程列表 end -->
+</scroll-view>

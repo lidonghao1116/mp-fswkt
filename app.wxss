@@ -1,0 +1,128 @@
+/**app.wxss**/
+
+@import './template/coupon/coupon.wxss';
+@import './template/once/once.wxss';
+image {
+    width: 100%;
+}
+
+.color-g6 {
+    color: #666;
+}
+
+.color-g3 {
+    color: #333;
+}
+
+.color-r {
+    color: #FF0000;
+}
+
+.color-y {
+    color: #fff2bf;
+}
+
+.fr {
+    float: right;
+}
+
+.font-ee-sm {
+    font-size: 20rpx;
+}
+
+.font-extra-sm {
+    font-size: 24rpx;
+}
+
+.font-sm {
+    font-size: 28rpx;
+}
+
+.font-md {
+    font-size: 32rpx;
+}
+
+.font-lg {
+    font-size: 36rpx;
+}
+
+.font-extra-lg {
+    font-size: 40rpx;
+}
+
+.ver-center {
+    line-height: 100%;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.themeColor {
+    color: #00aa66;
+}
+
+.themeColor-bg {
+    background-color: #00aa66;
+}
+
+.gColor-bg {
+    background-color: #d2d2d2;
+}
+
+.border1 {
+    border-bottom: 1px solid #ddd;
+}
+
+.mgr30 {
+    margin-right: 30rpx;
+}
+
+.mgr76 {
+    margin-right: 76rpx;
+}
+
+.mgr10 {
+    margin-right: 10rpx;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ellipsis2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.ellipsis3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+
+/*统一内边距*/
+
+.theme-padding {
+    padding: 30rpx;
+    white-space: nowrap;
+    min-height: 40rpx;
+}
+
+
+/* 分割线*/
+
+.cut-line {
+    height: 30rpx;
+    width: 100%;
+    display: block;
+    background: #F2F2F2;
+}
