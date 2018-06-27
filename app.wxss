@@ -1,13 +1,13 @@
 /**app.wxss**/
 
-@import './template/coupon/coupon.wxss';
-@import './template/once/once.wxss';
+@import './template/packet/index.wxss';
+@import './template/commonSendCoupon/index.wxss';
 image {
     width: 100%;
 }
 
 .color-g6 {
-    color: #666;
+    color: #999;
 }
 
 .color-g3 {
@@ -55,7 +55,7 @@ image {
 }
 
 .bold {
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .themeColor {
@@ -120,9 +120,76 @@ image {
 
 /* 分割线*/
 
-.cut-line {
-    height: 30rpx;
+
+.split {
+    height: 8px;
+    background: hsla(0,0%,90%,.4);
     width: 100%;
-    display: block;
-    background: #F2F2F2;
 }
+
+
+/*
+  课程列表 start
+*/
+
+
+.course-box .course-list {
+    padding: 30rpx 0 0 30rpx;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.course-box .course-list .img {
+    width: 120rpx;
+    height: 120rpx;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 30rpx;
+}
+
+.course-box .course-list .img image {
+    width: 100%;
+    height: 100%;
+    border-radius: 10rpx;
+}
+
+.course-box .course-list .course-info {
+    display: inline-block;
+    width: 690rpx;
+    height: 120rpx;
+    padding: 0 30rpx 30rpx 0;
+    border-bottom:1px solid #e5e5e5;
+}
+
+.course-box .course-list .course-info .main {
+    display: inline-block;
+    width: 480rpx;
+    height: 100%;
+}
+
+.course-box .course-list .course-info .two {
+    width: 460rpx;
+    margin-top: 8rpx;
+}
+
+.course-box .course-list .course-info .bottomBox {
+    margin-top: 14rpx;
+}
+
+.nav-right {
+    width: 30rpx;
+    height: 120rpx;
+    background: url("http://fengsheng-image.oss-cn-shenzhen.aliyuncs.com/sys/right.png") no-repeat center center;
+    background-size: 20rpx 30rpx;
+}
+
+.nav-right .right {
+    width: 30rpx;
+    height: 150rpx;
+    background: #562;
+}
+
+
+/*
+  课程列表 end
+*/

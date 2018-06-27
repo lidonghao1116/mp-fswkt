@@ -1,0 +1,155 @@
+.coupon-box {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.coupon-box .main {
+    width: 550rpx;
+    height: 750rpx;
+    box-sizing: border-box;
+    animation: changeSize 2s forwards;
+    /* transform-: translate(-275rpx, -375rpx); */
+    text-align: center;
+}
+
+@keyframes changeSize {
+    0% {
+        transform: scale(0.5)
+    }
+    80% {
+        transform: scale(1.1)
+    }
+    100% {
+        transform: scale(1)
+    }
+}
+
+.coupon-box .main .head {
+    height: 120rpx;
+    width: 120rpx;
+    border: 6rpx solid #db5443;
+    border-radius: 50%;
+    display: inline-block;
+    z-index: 99;
+    position: relative;
+}
+
+.coupon-box .main .head .icon {
+    height: 120rpx;
+    width: 120rpx;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.coupon-box .main .coupon {
+    position: relative;
+    z-index: 88;
+    height: 650rpx;
+    width: 550rpx;
+    background: #db5443;
+    top: -80rpx;
+    padding-top: 92rpx;
+    box-sizing: border-box;
+    border-radius: 6rpx;
+}
+
+.coupon-box .main .coupon .item1 {
+    margin-bottom: 4rpx;
+}
+
+.coupon-box .main .coupon .item2 {
+    margin-bottom: 50rpx;
+}
+
+.coupon-box .main .coupon .item5 {
+    margin-top: 40rpx;
+}
+
+.coupon-box .main .coupon .openBtn-box {
+    margin: 40rpx 0;
+    font-size: 80rpx;
+    color: #db5443;
+    background: #fff2bf;
+    height: 160rpx;
+    width: 160rpx;
+    display: inline-block;
+    border-radius: 50%;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 5rpx;
+}
+
+.coupon-box .main .coupon .openBtn-box .open-btn {
+    height: 150rpx;
+    width: 150rpx;
+    border-radius: 50%;
+    border: 2rpx solid #db5443;
+    line-height: 150rpx;
+    background: #fff2bf;    color: #db5443;
+    font-size: 60rpx;
+    font-weight: bold;
+}
+
+.coupon-box .main .coupon .info-box {
+    margin: 40rpx 0;
+    background: #fff2bf;
+    border-radius: 10rpx;
+    color: #db5443;
+    width: 470rpx;
+    display: inline-block;
+    white-space: nowrap;
+    height: 200rpx;
+}
+
+.coupon-box .main .coupon .info-box .info-box-item {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.coupon-box .main .coupon .info-box .info-box-item1 .price {
+    font-size: 40rpx;
+}
+
+.coupon-box .main .coupon .info-box-item2 {
+    height: 100%;
+    width: 20rpx;
+    vertical-align: top;
+    position: relative;
+    background: url('http://fengsheng-image.oss-cn-shenzhen.aliyuncs.com/sys/red-line.png') no-repeat center center;
+    background-size: 100% 100%;
+}
+
+.coupon-box .main .coupon .info-box-item3 {
+    margin: 60rpx 10rpx;
+    line-height: 40rpx;
+}
+
+.close-btn {
+    height: 60rpx;
+    width: 60rpx;
+    display: inline-block;
+    background: url('http://fengsheng-image.oss-cn-shenzhen.aliyuncs.com/sys/close.png') no-repeat center center;
+    background-size: 100% 100%;
+    position: absolute;
+    top: -50rpx;
+    right: -62rpx;
+}
+
+.ani-rotate {
+    animation: rotate 2s forwards;
+}
+
+@keyframes rotate {
+    0% {}
+    100% {
+        transform: rotateY(720deg);
+    }
+}

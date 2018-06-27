@@ -1,0 +1,8 @@
+<view class="i-class i-tab-bar-item">
+    <view bindtap="handleClickItem">
+        <image src="{{ image }}" class="i-tab-bar-item-image" wx:if="{{ !current }}"/>
+        <image src="{{ selectedImage }}" class="i-tab-bar-item-image current" wx:else/>
+        <view class="i-tab-bar-item-title {{ current ? 'i-tab-bar-item-title-current' : '' }}" wx:if="{{ current && currentColor }}" style="color: {{ currentColor }}">{{ title }}</view>
+        <view class="i-tab-bar-item-title {{ current ? 'i-tab-bar-item-title-current' : '' }}" wx:else>{{ title }}</view>
+    </view>
+</view>

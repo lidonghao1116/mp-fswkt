@@ -1,127 +1,22 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-/// <reference path="../../wxAPI.d.ts"/>
-const util_1 = require("./../../utils/util");
-const api_1 = require("./../../utils/api");
-const storge_1 = require("./../../utils/storge");
-let app = getApp();
-let pageConfig = {
-    showBackTopHeight: 600,
-    pageSize: 10,
-    page: 1,
-    flag: true //是否还可以再次获取列表 
-};
-let indexData = {
-    showAuthorModal: false,
-    ready: false,
-    actId: 0,
-    showBackTop: false,
-    scrollTop: 0,
-    imgUrls: [],
-    courseList: [],
-    indicatorDots: true,
-    autoplay: true,
-    interval: 5000,
-    duration: 1000,
-    showCoupon: false,
-    showOnce: true,
-    couponData: {
-        totalMoney: '0',
-        couponMoney: '0',
-        desc: '0',
-        endtime: '0',
-        hasGotCoupon: false,
-        granting: false
-    },
-    onceData: {
-        totalMoney: '0',
-        couponMoney: '20',
-        desc: '0',
-        hasGotCoupon: false,
-        granting: false
-    },
-    params: {}
-};
+const api = require("./../../utils/api")
+const util_1 = require("./../../utils/util")
+const storge = require("./../../utils/storge");
+
+let tabData = {}
+const start = {}
+const end = {}
+const app = getApp();
+
 Page({
-    data: indexData,
-    onLoad: function (options) {
-      wx.hideTabBar();
-      const me = this  
-      if (!app.globalData.userInfo) {
-        wx.getSetting({
-          success(res) {
-            if (res.authSetting['scope.userInfo']) {
-              me.login()
-            } else {
-              me.setData({
-                showAuthorModal: true
-              })
-            }
-          }
-        })
-      } else {
-        this.init()
-      }
-      let params = util_1.getParams(options);
-      let logData = [{ event: '100' }];
-      this.setData({ params });
-      api_1.vLog(logData);
-    },
-    onGotUserInfo: function (e) {
-      if (e.detail.userInfo) {
-        this.login()
-      } else {
-        wx.openSetting({
-          success: res => {
-            if (res.authSetting['scope.userInfo']) {
-              this.login()
-            } else {
-              wx.showToast({
-                title: '微信授权失败',
-                icon: 'none'
-              })
-            }
-          }
-        })
-        
-      }
-    },
-    login: function () {
-      let me = this;
-      //调用登录接口
-      wx.login({
-        success: data => {
-          let code = data.code;
-          wx.getUserInfo({
-            success: res => {
-              app.globalData.userInfo = res.userInfo;
-              res.code = code;
-              api_1.miniLogin(res).then(res => {
-                let obj = res.obj || {};
-                wx.setStorageSync(storge_1.TOKEN, obj.token);
-                me.init()
-              });
-            }
-          });
-        }
-      });
-    },
-    init: function (options) {
-        wx.showTabBar();
-        this.setData({
-          showAuthorModal: false
-        })
-        let me = this;
-        pageConfig.flag = true;
-        pageConfig.page = 1;
-        //获取banner图
-       
-        api_1.queryBanners().then(res => {
-            me.setData({ imgUrls: res.obj });
-        });
-        //获取课程列表
-        me.setCourseList();
-        //me.checkValidAct();
+    data: {
+        selectTabId: 0,
+        scrollH: 0,
+        scrollW: 0,
+        groups: [],
+        banners: [],
+        courses: [],
+        showAuth: false,
     },
     onShareAppMessage: function (res) {
         if (res.from === 'button') {
@@ -129,11 +24,11 @@ Page({
             console.log(res.target);
         }
         return {
-            title: storge_1.shareTitle,
-            path: util_1.getSharePath(),
+            title: '丰盛微课堂',
+            path: util_1.getSharePath('info'),
             success: function (res) {
                 // 转发成功
-                let logData = [{ event: '600' }];
+                let logData = { event: 600 }
                 api_1.vLog(logData);
             },
             fail: function (res) {
@@ -141,241 +36,216 @@ Page({
             }
         };
     },
-    /**
-     * @description 检查当前优惠券是否可用
-     * @return {void}
-     */
-    checkValidAct: function () {
-        let me = this;
-        let params = me.data.params;
-        if (params.channel == 1008) {
-            me.setData({ showOnce: true });
-            return;
-        }
-        if (params.actId) {
-            api_1.checkValidAct([Number(params.actId)]).then(res => {
-                let obj = res.obj || {};
-                let isValid = obj.isValid;
-                if (isValid) {
-                    me.getCouponByAct(Number(params.actId));
+    onLoad (options) {
+        tabData = {}
+        if (!app.globalData.userInfo) {
+            wx.getSetting({
+              success: res => {
+                if (res.authSetting['scope.userInfo']) {
+                  this.login()
+                } else {
+                    wx.setNavigationBarColor({
+                        backgroundColor : '#bdb5c2',
+                        frontColor: '#ffffff'
+                    })
+                    var res = wx.getSystemInfoSync()
+                    this.setData({
+                        scrollH: res.windowHeight - 40,
+                        scrollW: res.windowWidth
+                    })
+                    this.setData({
+                        showAuth: true
+                    })
                 }
+              }
+            })
+        } else {
+            this.init()
+        }
+        //   let params = util_1.getParams(options);
+        //   this.setData({ params });
+
+        
+    },
+    onGotUserInfo: function (e) {
+        if (e.detail.userInfo) {
+          this.login()
+        } else {
+          wx.openSetting({
+            success: res => {
+              if (res.authSetting['scope.userInfo']) {
+                this.login()
+              } else {
+                wx.showToast({
+                  title: '微信授权失败',
+                  icon: 'none'
+                })
+              }
+            }
+          })
+          
+        }
+      },
+      login: function () {
+        //调用登录接口
+        wx.login({
+          success: data => {
+            let code = data.code;
+            wx.getUserInfo({
+              success: res => {
+                app.globalData.userInfo = res.userInfo;
+                res.code = code;
+                api.miniLogin(res).then(res => {
+                  wx.setStorageSync(storge.TOKEN, res.token);
+                  this.init()
+                });
+              }
             });
-        }
-        else {
-            //me.getValidActivity();
-        }
-    },
-    getCouponByAct: function (actId) {
-        let me = this;
-        let couponData = me.data.couponData;
-        api_1.grantCoupon([actId]).then(res => {
-            let me = this;
-            let obj = res.obj || {};
-            if (!obj.couponCode) {
-                return;
-            }
-            couponData.couponMoney = (obj.fee / 100).toFixed(2);
-            couponData.desc = obj.title;
-            couponData.endtime = util_1.formatDayTime(new Date(obj.endTime));
-            couponData.granting = false;
-            couponData.hasGotCoupon = true;
-            me.setData({ couponData, showCoupon: true });
+          }
         });
+      },
+    init: function (options) {
+        this.setData({
+            showAuth: false
+        })
+        wx.setNavigationBarColor({
+            backgroundColor : '#ffffff',
+            frontColor: '#000000'
+        })
+        wx.setNavigationBarTitle({
+            title: '丰盛微课堂'
+          })
+        this.getSystemInfo()
+        this.queryGroups().then(() => {
+            this.setData({
+                groupId: this.data.groups[0].id
+            })
+            this.queryCourse(this.data.groups[0].id)
+        })
+        this.queryBanner()
+        
+        let logData = { event: 100 }
+        api.vLog(logData)
     },
-    /**
-     * @description 领取优惠券
-     * @return {void}
-     */
-    getCoupon: function () {
-        let me = this;
-        let couponData = me.data.couponData;
-        couponData.granting = true;
-        me.setData({ couponData });
-        api_1.grantCoupon([me.data.actId]).then(res => {
-            let me = this;
-            let obj = res.obj || {};
-            couponData.couponMoney = (obj.fee / 100).toFixed(2);
-            couponData.desc = obj.title;
-            couponData.endtime = util_1.formatDayTime(new Date(obj.endTime));
-            if (obj.actId) {
-                me.setData({ showCoupon: true, actId: obj.actId, couponData });
-            }
-        });
-        setTimeout(() => {
-            couponData.granting = false;
-            couponData.hasGotCoupon = true;
-            me.setData({ couponData });
-        }, 2000);
-    },
-    /**
-    * @description 领取优惠券
-    * @return {void}
-    */
-    getCoupon1: function () {
-        let me = this;
-        let onceData = me.data.onceData;
-        onceData.granting = true;
-        me.setData({ onceData });
-        let arr = [1009, 1010, 1011, 1012, 1013];
-        arr.forEach(ele => {
-            api_1.grantCoupon([ele]).then(res => {
-                let me = this;
-                let obj = res.obj || {};
-                onceData.desc = obj.title || '已参加过活动';
-                if (obj.actId) {
-                    me.setData({ showOnce: true, actId: obj.actId, onceData });
-                }
-            });
-        });
-        setTimeout(() => {
-            onceData.granting = false;
-            onceData.hasGotCoupon = true;
-            me.setData({ onceData });
-        }, 2000);
-    },
-    /**
-     * @description 关闭红包领取界面
-     * @return {void}
-     */
-    closeCoupon: function (e) {
-        let me = this;
-        let couponData = me.data.couponData;
-        let hasGotCoupon = couponData.hasGotCoupon;
-        if (e.target.dataset.close == '2') {
-            me.setData({ showCoupon: false });
-        }
-        else if (e.target.dataset.close == '1' && hasGotCoupon) {
-            me.setData({ showCoupon: false });
+    tabBarChange (e) {
+        const key = e.detail.key
+        switch (key) {
+            case 'learn':
+                wx.navigateTo({url: '../../package/pages/myCourse/myCourse'})
+                break;
+            case 'person':
+                wx.navigateTo({url: '../../package/pages/personalCenter/personalCenter'})
+                break;
+            default: break;
         }
     },
-    closeCoupon1: function (e) {
-        let me = this;
-        let onceData = me.data.onceData;
-        let hasGotCoupon = onceData.hasGotCoupon;
-        if (e.target.dataset.close == '2') {
-            me.setData({ showOnce: false });
-        }
-        else if (e.target.dataset.close == '1' && hasGotCoupon) {
-            me.setData({ showOnce: false });
-        }
-    },
-    /**
-     * @description 获取可领取优惠券
-     * @return {void}
-     */
-    getValidActivity: function () {
-        api_1.getValidActivity().then(res => {
-            let me = this;
-            let obj = res.obj || {};
-            let couponData = me.data.couponData;
-            couponData.totalMoney = (obj.totalFee / 100).toFixed(2);
-            if (obj.actId) {
-                me.setData({ showCoupon: true, actId: obj.actId, couponData });
-            }
-        });
-    },
-    /**
-     * @description 更新课程列表
-     * @param {Object} res
-     * @return {void}
-     */
-    setCourseList: function () {
-        //获取课程列表
-        let me = this;
-        if (!pageConfig.flag) {
-            return;
-        }
-        pageConfig.flag = false;
-        api_1.queryCourses([null, null, pageConfig.page, pageConfig.pageSize]).then(res => {
-            let course, obj = res.obj || {};
-            let record = obj.record;
-            let newList = this.data.courseList;
-            if (record) {
-                record.forEach(ele => {
-                    let course = ele.course;
-                    ele.tutor = ele.tutor ? ele.tutor : {};
-                    /** 转化需要的字段 start */
-                    course.tname = ele.tutor.tname;
-                    course.headImgUrl = ele.tutor.headImgUrl;
-                    course.price = (course.price / 100).toFixed(2);
-                    /** 转化需要的字段 end */
-                    newList.push(course);
+    getSystemInfo () {
+        wx.getSystemInfo({
+            success: (res) => {
+                this.setData({
+                    scrollH: res.windowHeight - 50 // 底部tabbar高度
                 });
             }
-            me.setData({ courseList: newList });
-            pageConfig.flag = obj.recordCount >= pageConfig.pageSize;
-            pageConfig.page += 1;
-        });
+        })
     },
-    /**
-     * @description 当主页滑到底端时，需要刷新数据
-     * @param {Event} e
-     * @return {void}
-     */
-    lower: function (e) {
-        let me = this;
-        me.setCourseList();
+    touchstart (e) {
+        start.x = e.changedTouches[0].pageX
+        start.y = e.changedTouches[0].pageY
     },
-    /**
-     * @description 滚动监听
-     * @param {Event} e
-     * @return {void}
-     */
-    scroll: function (e) {
-        let scrollTop = e.detail.scrollTop;
-        if (scrollTop > pageConfig.showBackTopHeight) {
-            this.setData({ showBackTop: true });
+    touchend (e) {
+        end.x = e.changedTouches[0].pageX
+        end.y = e.changedTouches[0].pageY
+        
+        const X = end.x - start.x
+        const Y = end.y - start.y
+    
+        const r = Math.atan2(Y, X) * 180 / Math.PI
+        if ((r >= 155 && r <= 180) || (r >= -180 && r < -160)) {
+            if (this.data.selectTabId < this.data.groups.length - 1) {
+                this.setData({
+                    selectTabId: Number(this.data.selectTabId) + 1
+                })
+                this.preQueryCourse(this.data.groups[this.data.selectTabId].id)
+            }
+        } else if (r >= -35 && r <= 35 && r !== 0) {
+            if (this.data.selectTabId > 0) {
+                this.setData({
+                    selectTabId: Number(this.data.selectTabId) - 1
+                })
+                this.preQueryCourse(this.data.groups[this.data.selectTabId].id)
+            }
         }
-        else {
-            this.setData({ showBackTop: false });
-        }
     },
-    /**
-     * @description 返回顶部
-     * @return {void}
-     */
-    goTop: function () {
-        this.setData({ scrollTop: 0 });
+    tabChange (e) {
+        const selectTabId = e.detail.key
+        const groupId = this.data.groups[selectTabId].id
+        this.setData({
+            selectTabId
+        })
+        this.preQueryCourse(groupId)
     },
-    /**
-    * @description 进入课程详情页
-    * @param {Event} e
-    * @return {void}
-    */
-    goCourseInfo: function (e) {
-        let cid = e.currentTarget.dataset.id;
-        let banner = e.currentTarget.dataset.banner
-        if (banner) {
-            let logData = [{ event: '401' }];
-            api_1.vLog(logData);
-        }
-        let url = `../info/info?cid=${cid}`;
+    lower () {
+        this.queryCourse (this.data.groups[this.data.selectTabId].id)
+    },
+    tapBanner (e) {
         wx.navigateTo({
-            url
-        });
+            url: '../../package/pages/info/info?cid=' + e.currentTarget.dataset.cid
+        })
+        let logData = { event: 401 }
+        api.vLog(logData)
     },
-    /**
-     * @description 上报form_id
-     * @return {void}
-     */
-    formSubmit: function (e) {
-        let form_id = e.detail.formId;
-        let that = this;
-        console.log('form_id' + form_id);
-        api_1.addLittleTemplateMsg([{ form_id }]).then(res => {
-            console.log('上报成功');
-            console.log(res);
-        });
+    goCourseInfo (e) {
+        wx.navigateTo({
+            url: '../../package/pages/info/info?cid=' + e.currentTarget.dataset.cid
+        })
     },
-    btn1: function () {
-        let me = this;
-        wx.navigateToMiniProgram({
-            appId: 'wxd6c5337aed6300ec',
-            path: 'pages/index/index?shareType=getPrize&prize_id=1'
-        });
+    goSearch () {
+        wx.navigateTo({
+            url: '../../package/pages/search/search'
+        })
     },
-    btn2: function () {
-        let me = this;
-        me.setData({ showOnce: false });
+    queryGroups () {
+        return api.queryGroups().then(res => {
+            this.setData({
+                groups: res.data
+            })
+        })
+    },
+    queryBanner () {
+        api.queryBanners().then(res => {
+            this.setData({
+                banners: res.obj.filter(banner => banner.cid && !banner.url)
+            })
+        })
+    },
+    preQueryCourse (groupId) {
+        if (tabData[groupId]) {
+            this.setData({
+                courses: tabData[groupId].courses
+            })
+        } else {
+            this.queryCourse(groupId)
+        }
+    },
+    queryCourse (groupId) {
+        tabData[groupId] = tabData[groupId] || {}
+        if (tabData[groupId].pageno > tabData[groupId].pageCount) return
+
+        tabData[groupId].pageno = tabData[groupId].pageno || 1,
+        api.queryCourses({
+            pageno: tabData[groupId].pageno,
+            pagesize: 10,
+            groupId
+        }).then(res => {
+            
+            let courses = tabData[groupId].courses || []
+            courses = courses.concat(res.record)
+
+            tabData[groupId].courses = courses
+            this.setData({courses})
+
+            tabData[groupId].pageno = tabData[groupId].pageno + 1
+            tabData[groupId].pageCount = res.pageCount
+        })
     }
 });

@@ -1,0 +1,121 @@
+.coupon-box {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.font-extra-sm {
+  font-size: 48rpx;
+}
+
+.coupon-box .main {
+  width: 275px;
+  height: 375px;
+  box-sizing: border-box;
+  animation: changeSize 2s forwards;
+  text-align: center;
+}
+@keyframes changeSize {
+  0% {
+    transform: scale(0.5);
+  }
+  80% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+.coupon-box .main .head {
+  height: 60px;
+  width: 60px;
+  border: 3px solid #db5443;
+  border-radius: 50%;
+  display: inline-block;
+  z-index: 99;
+  position: relative;
+}
+
+.coupon-box .main .head .icon {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.coupon-box .main .coupon {
+  position: relative;
+  z-index: 88;
+  height: 325px;
+  width: 275px;
+  background: #db5443;
+  top: -40px;
+  padding-top: 46px;
+  box-sizing: border-box;
+  border-radius: 6px;
+}
+
+.coupon-box .main .coupon view {
+  font-size: 24rpx;
+}
+.coupon-box .main .coupon .item1 {
+  margin-bottom: 2px
+}
+
+.coupon-box .main .coupon .item5 {
+  margin-top: 20px;
+}
+
+.coupon-box .main .coupon .info-box {
+  margin: 20px 0;
+  background: #fff2bf;
+  border-radius: 5px;
+  color: #db5443;
+  width: 235px;
+  display: inline-block;
+  white-space: nowrap;
+  height: 100px;
+}
+
+.coupon-box .main .coupon .info-box .info-box-item {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.coupon-box .main .coupon .info-box .info-box-item1 .price {
+  font-size: 40rpx;
+}
+
+.coupon-box .main .coupon .info-box-item2 {
+  height: 100%;
+  width: 10px;
+  vertical-align: top;
+  position: relative;
+  background: url('http://fengsheng-image.oss-cn-shenzhen.aliyuncs.com/sys/red-line.png') no-repeat center center;
+  background-size: 100% 100%;
+}
+
+.coupon-box .main .coupon .info-box-item3 {
+  margin: 30px 5px;
+  line-height: 20px;
+}
+
+
+.close-btn {
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  background: url('http://fengsheng-image.oss-cn-shenzhen.aliyuncs.com/sys/close.png') no-repeat center center;
+  background-size: 100% 100%;
+  position: absolute;
+  right: 0;
+  transform: translateX(50%)
+}

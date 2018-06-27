@@ -1,0 +1,156 @@
+/**index.wxss**/
+
+page {
+    height: 100%;
+    background:#e7e7e7;
+}
+
+.container {
+    height: 100%;
+    z-index: 9;
+    background: #eee;
+}
+
+
+/* 返回顶部按钮 start*/
+
+.backTop-box {
+    position: fixed;
+    bottom: 118rpx;
+    right: -90rpx;
+    width: 80rpx;
+    height: 80rpx;
+    z-index: 999;
+    border-radius: 50%;
+    background: url("http://fengsheng-image.oss-cn-shenzhen.aliyuncs.com/sys/top.png") no-repeat center center;
+    background-size: 100%;
+}
+
+.backTop-box.show {
+    animation: backTopShow 0.5s forwards;
+}
+
+@keyframes backTopShow {
+    0% {
+        right: -90rpx;
+    }
+    100% {
+        right: 25rpx;
+    }
+}
+
+
+/* 返回顶部按钮 end*/
+
+
+/*
+  优惠券列表 begin
+*/
+
+.coupon-list-box {
+    padding: 20rpx 20rpx 0 20rpx;
+}
+
+.coupon-list {
+    margin-bottom: 20rpx;
+    height: 182rpx;
+    white-space: nowrap;
+}
+
+.coupon-list .main-left {
+    width: 225rpx;
+    display: inline-block;
+    height: 182rpx;
+    line-height: 182rpx;
+    vertical-align: top;
+    background-color: #db5443;
+    color: #fff;
+    background-image: url('http://fengsheng-image.oss-cn-shenzhen.aliyuncs.com/sys/ticket001.png');
+    background-size: 10rpx 100%;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    padding-left: 30rpx;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.coupon-list .main-left .price {
+    font-size: 50rpx;
+}
+
+.coupon-list .main-right {
+    width: 485rpx;
+    display: inline-block;
+    background: #fff;
+    height: 182rpx;
+    vertical-align: top;
+    padding-left: 30rpx;
+    box-sizing: border-box;
+    background-image: url('http://fengsheng-image.oss-cn-shenzhen.aliyuncs.com/sys/ticket002.png');
+    background-size: 10rpx 100%;
+    background-position: 475rpx 0;
+    background-repeat: no-repeat;
+    padding-right: 30rpx;
+}
+
+.coupon-list .main-right .head {
+    height: 90rpx;
+    line-height: 90rpx;
+    border-bottom: 1rpx dotted #ddd;
+}
+
+.coupon-list .main-right .end-time {
+    height: 90rpx;
+    line-height: 90rpx;
+}
+
+.coupon-list .main-right .btn-use {
+    float: right;
+    vertical-align: middle;
+    padding: 0 20rpx;
+    border-radius: 30rpx;
+    border: 1rpx solid #db5443;
+    color: #db5443;
+    margin-left: 20rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    margin-top: 15rpx;
+}
+
+.coupon-list-box.empty .main-left {
+    background-color: #ccc;
+    background-image: url('http://fengsheng-image.oss-cn-shenzhen.aliyuncs.com/sys/ticket003.png');
+    background-size: 10rpx 100%;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+}
+
+.coupon-list-box.empty .main-right .btn-use {
+    border: 1rpx solid #ccc;
+    color: #ccc;
+}
+
+.coupon-list-box.empty .empty-info {
+    text-align: center;
+    line-height: 50rpx;
+    font-size: 28rpx;
+    margin: 20rpx 0;
+}
+
+
+/*
+  优惠券列表 end
+*/
+
+.more-box {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background: #3fb67f;
+    text-align: center;
+    color: #fff;
+    font-size: 28rpx;
+}

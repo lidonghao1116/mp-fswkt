@@ -1,0 +1,33 @@
+<template name="commonSendCoupon">
+  <view class="coupon-box font-extra-sm" bindtap="closeCommonCoupon"> 
+    <view class="main">
+      <view class="head">
+        <image src="http://fengsheng-image.oss-cn-shenzhen.aliyuncs.com/sys/share-logo.jpg" class="icon" />
+      </view>
+      <view class="coupon">
+        <view class="item1">丰盛研习社</view>
+        <view class="font-lg color-y item5">恭喜你！</view>
+        <view class="font-lg color-y item6">
+            <text>获得</text>
+            <text>{{couponMoney}}</text>
+            <text>元现金券1张</text>
+        </view>
+        <view class="info-box font-lg">
+          <view class="info-box-item1 info-box-item">
+              <text class="font-ee-sm">￥</text>
+              <text class="price">{{couponMoney}}</text>
+          </view>
+          <view  class="info-box-item2 info-box-item">
+          </view>
+          <view  class="info-box-item3 info-box-item">
+              <view class="ellipsis font-sm">{{desc}}</view>
+              <view class="font-ee-sm ellipsis">有效期至： {{endtime}}</view>
+          </view>
+        </view>
+        <view class="color-y font-extra-sm">可用于购买丰盛研习社任意课程</view>
+        <view class="color-y font-extra-sm">每次使用一张</view>
+      </view>
+      <view class="close-btn" bindtap="closeCommonCoupon"></view>
+    </view>
+  </view>
+</template>

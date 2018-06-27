@@ -1,0 +1,48 @@
+ <view class="box">
+  <view class="head">
+    <image src="../../../static/img/default-bg.jpg" />
+  </view>
+  <view class="avatar">
+    <view>
+      <view>已学习课程</view>
+      <view class="grn">{{lesson.lessonNum}}节</view>
+    </view>
+    <image src="{{user.headImgUrl}}" />
+    <view>
+      <view>
+        <view>已学习天数</view>
+        <view class="grn">{{lesson.lessonDays}}天</view>
+      </view>
+    </view>
+  </view>
+  <view class="list-split"/>
+  <view class="list-box">
+    <view class="list" bindtap="goRecords">
+      <view>
+        <image src="../../../static/img/records.png" class="icon" />
+        <view>学习记录</view>
+      </view>
+      <image src="../../../static/img/arrow-right.png" class="arrow-right" />
+    </view>
+    <view class="list" bindtap="goCart">
+      <view>
+        <image src="../../../static/img/cart.png" class="icon" />
+        <view>购买记录</view>
+      </view>
+      <image src="../../../static/img/arrow-right.png" class="arrow-right" />
+    </view>
+    <view class="split" />
+    <view class="list" bindtap="gocCupon">
+      <view>
+        <image src="../../../static/img/coupon.png" class="icon" />
+        <view>优惠券</view>
+      </view>
+      <image src="../../../static/img/arrow-right.png" class="arrow-right" />
+    </view>
+  </view>
+</view>
+<i-tab-bar current="person" bindchange="tabBarChange" fixed>
+  <i-tab-bar-item key="course" image="../../static/img/tab-course.png" selected-image="../../static/img/tab-course-active.png" title="课程"></i-tab-bar-item>
+  <i-tab-bar-item key="learn" image="../../static/img/tab-my-learn.png" selected-image="../../static/img/tab-my-learn-active.png" title="我的学习"></i-tab-bar-item>
+  <i-tab-bar-item key="person" image="../../static/img/tab-person.png" selected-image="../../static/img/tab-person-active.png" title="个人中心"></i-tab-bar-item>
+</i-tab-bar>

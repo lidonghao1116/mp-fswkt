@@ -1,0 +1,45 @@
+<view class="search-box">
+  <view class="search">
+    <icon type="search" size="15"/>
+    <input placeholder="好课程都在这里" confirm-type="搜索" focus bindinput="inputing" value="{{ default }}" />
+    <icon type="clear" class="clear-icon" size="15" wx:if="{{ default }}" bindtap="clearInput" />
+  </view>
+  <view class="search-btn" bindtap="tapSearch">{{ btnText }}</view>
+</view>
+
+<view wx:if="{{ courses.length === 0 && !isSearched}}">
+  <view class="hot-title">搜索热词</view>
+  <view class="hot-world" bindtap="hotwordSearch">
+    <text id="学习力">学习力</text>
+    <text id="记忆力">记忆力</text>
+    <text id="英语">英语</text>
+    <text id="写作">写作</text>
+    <text id="吕菲菲">吕菲菲</text>
+  </view>
+</view>
+
+<view class="no-result" wx:elif="{{ courses.length === 0 && isSearched }}">
+  <view class="image-box">
+    <image src="../../../static/img/no-result.png" />
+  </view>
+  <view class="text">暂未搜索到任何内容，请换一个词再试试</view>
+</view>
+
+<view class="course-box" wx:else>
+  <view wx:for="{{courses}}" wx:key="course" class="course-list" bindtap="goCourseInfo" data-cid="{{item.course.cid}}">
+    <view class="course-info">
+      <view class="img">
+        <image src="{{item.tutor.headImgUrl}}"  />
+      </view>
+      <view class="main">
+        <view class="font-sm ellipsis one bold color-g3">{{item.course.title}}</view>
+        <view class="color-g6 font-extra-sm ellipsis two">{{item.course.slogo}}</view>
+        <view class="font-extra-sm bottomBox">
+          <text class="mgr76 color-g3">{{item.course.orderNum}}人在学</text>
+          <text class="color-r" wx-if="{{item.course.price != 0}}">￥{{item.course.price/100}}</text>
+          <text class="themeColor" wx-if="{{item.course.price == 0}}">免费</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

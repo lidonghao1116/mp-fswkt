@@ -1,0 +1,12 @@
+{
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "我的学习",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "i-tabs": "../../../components/tabs/index",
+    "i-tab": "../../../components/tab/index",
+    "i-tab-bar": "../../../components/tab-bar/index",
+    "i-tab-bar-item": "../../../components/tab-bar-item/index"
+  }
+}

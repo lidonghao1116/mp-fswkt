@@ -7,9 +7,9 @@
 		"minified": true,
 		"newFeature": true
 	},
-	"compileType": "game",
-	"libVersion": "1.9.1",
-	"appid": "wxea8dcedf89df0e63",
+	"compileType": "miniprogram",
+	"libVersion": "2.1.1",
+	"appid": "wx842482d145ee80df",
 	"projectname": "%E4%B8%B0%E7%9B%9B%E5%BE%AE%E8%AF%BE",
 	"isGameTourist": true,
 	"condition": {
@@ -58,6 +58,13 @@
 					"name": "领劵",
 					"pathName": "pages/info/info",
 					"query": "cid=1000?actId=1020",
+					"scene": "1001"
+				},
+				{
+					"id": 4,
+					"name": "领劵",
+					"pathName": "pages/info/info",
+					"query": "cid=1000&actId=1003",
 					"scene": "1001"
 				}
 			]

@@ -18,7 +18,6 @@ export const url = {
     createComplexOrder:host+'api/com.rocket.api.Order/createComplexOrder',            //下单
     queryCoupons:host+'api/com.rocket.api.Coupon/queryCoupons',         //查询所有优惠券
     grantCoupon:host+'api/com.rocket.api.Coupon/grantCoupon',           //发放优惠券
-    getValidActivity:host+'api/com.rocket.api.Coupon/getValidActivity', //获取当前可用优惠券
     addLittleTemplateMsg:host+'api/com.rocket.api.User/addLittleTemplateMsg',  //上传form_id
     checkValidAct:host+'api/com.rocket.api.Coupon/checkValidAct',              //检查当前活动是否可用
 }

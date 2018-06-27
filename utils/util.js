@@ -62,7 +62,6 @@ function getParams(options = {}) {
         }
     }
     if (scene) {
-        console.log('scene' + scene);
         arr = scene.split(",");
         arr.forEach(item => {
             key = item.split(":")[0];
@@ -79,6 +78,8 @@ exports.getParams = getParams;
  * @return {Promise}
  */
 function request(params) {
+    let TOKEN = wx.getStorageSync(storge_1.TOKEN);
+    params.data.shopid = 1010
     return new Promise((resolve, reject) => {
         wx.showLoading({
             title: '加载中...',
@@ -87,7 +88,9 @@ function request(params) {
         wx.request({
             url: params.url,
             data: params.data,
-            header: params.header,
+            header: {
+                TOKEN
+            },
             method: params.method || 'GET',
             dataType: params.dataType || 'json',
             responseType: params.responseType || 'text',

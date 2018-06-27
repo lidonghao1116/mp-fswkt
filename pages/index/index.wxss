@@ -39,10 +39,14 @@ page {
   font-size: 30rpx;
 }
 .container {
-    height: 100%;
     z-index: 9;
+    box-sizing: border-box;
 }
-
+.swiper-box {
+    box-sizing: border-box;
+    padding:0 50rpx;
+    margin:10px 0;
+}
 
 /* 返回顶部按钮 start*/
 
@@ -78,15 +82,13 @@ page {
 /*
   swiper start
 */
-
 .slide-swiper {
-    width: 750rpx;
-    height: 400rpx;
+    height: 175x;
 }
-
 .slide-image {
     width: 100%;
     height: 100%;
+    border-radius: 10px;
 }
 
 
@@ -94,69 +96,69 @@ page {
   swiper end
 */
 
-
-/*
-  课程列表 start
-*/
-
-.course-box {}
-
-.course-box .course-list {
-    padding: 30rpx 0 0 30rpx;
-    white-space: nowrap;
-    overflow: hidden;
+.search-box {
+    padding:0 16px;
 }
-
-.course-box .course-list .img {
-    width: 120rpx;
-    height: 120rpx;
+.search {
+    background:hsla(0,0%,90%,.4);
+    border-radius:10px;
+    height:40px;
+    display:flex;
+    align-items:center;
+    padding-left:13px;
+    font-size:14px;
+    color: #ccc;
+}
+.search-placeholder {
+   
     display: inline-block;
-    vertical-align: top;
-    margin-right: 30rpx;
 }
 
-.course-box .course-list .img image {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
+.remind {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 28rpx;
 }
-
-.course-box .course-list .course-info {
-    display: inline-block;
-    width: 690rpx;
-    height: 120rpx;
-    padding: 0 30rpx 30rpx 0;
+.remind .title {
+    font-size: 28rpx;
+    color: #86603e;
 }
-
-.course-box .course-list .course-info .main {
-    display: inline-block;
-    width: 480rpx;
-    height: 100%;
-}
-
-.course-box .course-list .course-info .two {
-    width: 460rpx;
-    margin-top: 8rpx;
-}
-
-.course-box .course-list .course-info .bottomBox {
-    margin-top: 14rpx;
-}
-
-.nav-right {
-    width: 30rpx;
-    height: 120rpx;
-    background: url("http://fengsheng-image.oss-cn-shenzhen.aliyuncs.com/sys/right.png") no-repeat center center;
-    background-size: 20rpx 30rpx;
-}
-
-.nav-right .right {
-    width: 30rpx;
-    height: 150rpx;
-    background: #562;
+.remind image {
+    width: 32rpx;
+    height: 32rpx;
+    vertical-align:middle;
 }
 
 
-/*
-  课程列表 end
-*/
+
+.auth {
+    position: relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding-top: 40px;
+    background: linear-gradient(#bdb5c2, #fff, rgb(210, 214, 217));
+}
+.auth button {
+    margin-top: 114rpx;
+    width: 210px;
+    background:rgb(51, 42, 48);
+    color:rgb(197, 165, 116);
+    /* position:absolute;
+    bottom: 180px;
+    left:50%;
+    transform:translateX(-50%); */
+}
+.auth .hover-auth-btn {
+    background:rgb(64, 46, 19);
+}
+
+.welcome1 {
+    width: 539rpx;
+    height: 255rpx;
+}
+.welcome2 {
+    margin-top: 48rpx;
+    width: 724rpx;
+    height: 446rpx;
+}

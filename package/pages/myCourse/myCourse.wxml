@@ -1,0 +1,39 @@
+<view class="tabs">
+  <i-tabs current="{{ selectTabId }}" bindchange="tabChange" color="#3FB67F">
+    <i-tab key="{{ index }}" title="{{ item.name }}" wx:for="{{ list }}" wx:key="{{ index }}"></i-tab>
+  </i-tabs>
+</view>
+
+<view class="split" />
+
+<view class="no-result" wx:if="{{ isSearched && courses.length === 0 }}" bindtouchstart="touchstart" bindtouchend="touchend">
+  <view class="img">
+    <image src="../../../static/img/no-learn.png" />
+  </view>
+  <view class="text">暂无课程，快去首页发现更多精彩好课吧</view>
+  <navigator url="../../../pages/index/index" class="accent">去学习</navigator>
+</view>
+
+ <view class="course-box" wx:else bindtouchstart="touchstart" bindtouchend="touchend">
+  <view wx:for="{{courses}}" wx:key="{{index}}" class="course-list" bindtap="goCourseInfo" data-cid="{{item.course.cid}}">
+    <view class="course-info">
+      <view class="img">
+        <image src="{{item.tutor.headImgUrl}}"  />
+      </view>
+      <view class="main">
+        <view class="font-sm ellipsis one bold color-g3">{{item.course.title}}</view>
+        <view class="color-g6 font-extra-sm ellipsis two">{{item.course.slogo}}</view>
+        <view class="font-extra-sm bottomBox">
+          <text class="mgr76 color-g3">{{item.course.orderNum}}人在学</text>
+          <text class="color-r" wx-if="{{item.course.price != 0}}">￥{{item.course.price/100}}</text>
+          <text class="themeColor" wx-if="{{item.course.price == 0}}">免费</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<i-tab-bar current="learn" bindchange="tabBarChange" fixed>
+  <i-tab-bar-item key="course" image="../../static/img/tab-course.png" selected-image="../../static/img/tab-course-active.png" title="课程"></i-tab-bar-item>
+  <i-tab-bar-item key="learn" image="../../static/img/tab-my-learn.png" selected-image="../../static/img/tab-my-learn-active.png" title="我的学习"></i-tab-bar-item>
+  <i-tab-bar-item key="person" image="../../static/img/tab-person.png" selected-image="../../static/img/tab-person-active.png" title="个人中心"></i-tab-bar-item>
+</i-tab-bar>

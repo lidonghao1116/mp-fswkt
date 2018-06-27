@@ -1,0 +1,36 @@
+page {
+  height: 100%;
+}
+.tabs {
+  padding: 0 50px;
+}
+.course-box, .no-result {
+  height: calc(100% - 102.5px);
+}
+.no-result {
+  text-align: center;
+}
+.no-result .img {
+  padding: 20px;
+}
+
+.no-result .img image {
+  width: 151px;
+  height: 151px;
+}
+.no-result .text {
+  color: #999;
+  font-size: 28rpx;
+}
+
+.no-result navigator {
+  display: inline-block;
+  width: 151px;
+  height: 42.5px;
+  text-align: center;
+  line-height: 42.5px;
+  color: #fff;
+  border-radius: 10px;
+  margin-top: 30px;
+  background: #3fb67f;
+}

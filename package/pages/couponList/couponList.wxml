@@ -1,0 +1,56 @@
+<!--index.wxml-->
+<!-- 优惠券 start -->
+<view class="coupon-list-box" wx-if="{{couponList.length > 0}}">
+    <view wx:for="{{couponList}}" wx:key="coupon" class="coupon-list">
+        <view class="main-left">
+            <text class="font-ee-sm">￥</text>
+            <text class="price">{{item.fee/100}}</text>
+        </view>
+        <view class="main-right">
+            <view class="head font-lg">
+                {{item.title}}
+            </view>
+            <view class="end-time font-extra-sm  color-g6">
+                <text>有效期至:</text>
+                <text>{{item.endTime}}</text>
+                <text class="btn-use" bindtap="goIndex">立即使用</text>
+            </view>
+        </view>
+    </view>
+</view> 
+<!-- 优惠券 end -->
+    <!-- 无优惠券 start -->
+<view  wx:else>
+<view class="coupon-list-box empty">
+    <view class="empty-info color-g6">
+        <view>
+            暂无优惠券
+        </view>
+        <view>
+            参与互动，获取优惠券
+        </view>
+    </view>
+    <view class="coupon-list">
+        <view class="main-left">
+            <text class="font-ee-sm">￥</text>
+            <text class="price">0</text>
+        </view>
+        <view class="main-right">
+            <view class="head font-lg color-g6">xxx优惠券</view>
+            <view class="end-time font-extra-sm  color-g6">
+                <text>有效期至:xxxx-xx-xx</text>
+                <text class="btn-use">立即使用</text>
+            </view>
+        </view>
+    </view>
+</view> 
+<!-- 无优惠券 end -->
+
+    <!-- 更多课程 start -->
+<view class="more-box" bindtap="goIndex">
+    <view class="more-button" >
+        更多好课
+    </view>
+</view>
+</view>
+<!-- 更多课程 end -->

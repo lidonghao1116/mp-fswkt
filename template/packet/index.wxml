@@ -1,0 +1,19 @@
+<template name="packet">
+    <view class="coupon-box font-extra-sm" catchtap="closePacket"> 
+        <view class="main">
+            <view class="head">
+                <image src="http://fengsheng-image.oss-cn-shenzhen.aliyuncs.com/sys/share-logo.jpg" class="icon" />
+            </view>
+            <view class="coupon" bindtap="openPacket" data-act-id="{{ actId }}" data-grant-type="{{ grantType }}">
+                <view class="item1">丰盛微课堂</view>
+                <view class="item2">发了一个红包，价值连城</view>
+                <view class="font-lg color-y item3">正在派现金红包</view>
+                <view class="font-lg color-y item4">快来领！</view>
+                <view class="openBtn-box {{granting?'ani-rotate':''}}">
+                    <button class="open-btn">开</button>
+                </view>
+            </view>
+            <view class="close-btn" bindtap="closePacket"></view>
+        </view>
+    </view>
+</template>

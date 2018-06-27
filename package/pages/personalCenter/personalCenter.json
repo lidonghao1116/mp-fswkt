@@ -1,0 +1,10 @@
+{
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "个人中心",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "i-tab-bar": "../../../components/tab-bar/index",
+    "i-tab-bar-item": "../../../components/tab-bar-item/index"
+  }
+}
