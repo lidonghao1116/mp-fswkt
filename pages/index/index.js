@@ -131,10 +131,10 @@ Page({
         const key = e.detail.key
         switch (key) {
             case 'learn':
-                wx.navigateTo({url: '../../package/pages/myCourse/myCourse'})
+                util_1.router(getCurrentPages(), '/package/pages/myCourse/myCourse')
                 break;
             case 'person':
-                wx.navigateTo({url: '../../package/pages/personalCenter/personalCenter'})
+                util_1.router(getCurrentPages(), '/package/pages/personalCenter/personalCenter')
                 break;
             default: break;
         }
@@ -188,21 +188,15 @@ Page({
         this.queryCourse (this.data.groups[this.data.selectTabId].id)
     },
     tapBanner (e) {
-        wx.navigateTo({
-            url: '../../package/pages/info/info?cid=' + e.currentTarget.dataset.cid
-        })
         let logData = { event: 401 }
         api.vLog(logData)
+        util_1.router(getCurrentPages(), '/package/pages/info/info?cid=' + e.currentTarget.dataset.cid)
     },
     goCourseInfo (e) {
-        wx.navigateTo({
-            url: '../../package/pages/info/info?cid=' + e.currentTarget.dataset.cid
-        })
+        util_1.router(getCurrentPages(), '/package/pages/info/info?cid=' + e.currentTarget.dataset.cid)
     },
     goSearch () {
-        wx.navigateTo({
-            url: '../../package/pages/search/search'
-        })
+        util_1.router(getCurrentPages(), '/package/pages/search/search')
     },
     queryGroups () {
         return api.queryGroups().then(res => {

@@ -160,3 +160,33 @@ function getSharePath(page = 'index', params = {}) {
     return path;
 }
 exports.getSharePath = getSharePath;
+
+export function router(pageStack, url) {
+    let index // url 在 页面栈中的位置
+    const len = pageStack.length // 当前页面栈长度
+    console.log(pageStack)
+    const MAX_PAGESTACK_LEN = 10 // 最大页面栈长度
+    for (let i = 0; i < len; i++) {
+        if ('/' + pageStack[i].route === url) {
+            index = i + 1
+            break
+        }
+    }
+
+    // url不在栈中
+    if (!index) {
+        if (len < MAX_PAGESTACK_LEN) {
+            wx.navigateTo({
+                url
+            })
+        } else {
+            wx.redirectTo({
+                url
+            })
+        }
+    } else {
+        wx.navigateBack({
+            delta: len - index
+        });
+    }
+}

@@ -305,18 +305,12 @@ Page({
                         /**todo begin */
                         if (cidMap = me.data.jumpCouse1[me.data.id]) {
                             if (cid = cidMap[index]) {
-                                let url = `../info/info?cid=${cid}`;
-                                wx.navigateTo({
-                                    url
-                                });
+                                util_1.router(getCurrentPages(), `/package/pages/info/info?cid=${cid}`)
                                 return;
                             }
                         }
                         if (cid = me.data.jumpCouse[id]) {
-                            let url = `../info/info?cid=${cid}`;
-                            wx.navigateTo({
-                                url
-                            });
+                            util_1.router(getCurrentPages(), `/package/pages/info/info?cid=${cid}`)
                             return;
                         }
                         /**todo end */
@@ -703,7 +697,7 @@ Page({
      * @returns {void}
      */
     goIndex: function () {
-        wx.navigateTo({url: '/pages/index/index'})
+        util_1.router(getCurrentPages(), '/pages/index/index')
     },
     /**
      * @description 播放完成

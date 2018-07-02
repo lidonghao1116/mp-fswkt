@@ -10,7 +10,7 @@ exports.config = {
         this.globalData.channel = param.channel || '-2';
         wx.setStorageSync(storge_1.CHANNEL, this.globalData.channel);
     },
-    appid: 'wx842482d145ee80df',
+    appid: 'your appid',
     globalData: {
         userInfo: null,
         channel: '-2'

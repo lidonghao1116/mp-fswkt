@@ -48,7 +48,7 @@ Page({
     * @param {Event} e
     * @return {void}
     */
-    goIndex: function (e) {
-        wx.navigateTo({url: '../../../pages/index/index'})
+    goIndex: function () {
+        util_1.router(getCurrentPages(), '/pages/index/index')
     }
 });

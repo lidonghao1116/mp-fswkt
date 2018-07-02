@@ -1,5 +1,6 @@
 "use strict";
 const api = require("./../../../utils/api")
+const util_1 = require("./../../../utils/util")
 
 Page({
   data: {
@@ -65,8 +66,6 @@ Page({
     })
   },
   goCourseInfo (e) {
-    wx.navigateTo({
-      url: '/pages/info/info?cid=' + e.currentTarget.dataset.cid
-  })
+    util_1.router(getCurrentPages(), '/package/pages/info/info?cid=' + e.currentTarget.dataset.cid)
   }
 })

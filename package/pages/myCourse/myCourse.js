@@ -1,4 +1,5 @@
 const api = require("./../../../utils/api")
+const util_1 = require("./../../../utils/util")
 
 const tabData = {}
 const start = {}
@@ -25,10 +26,10 @@ Page({
     const key = e.detail.key
     switch (key) {
         case 'course':
-        wx.navigateTo({url: '../../../pages/index/index'})
+          util_1.router(getCurrentPages(), '/pages/index/index')
           break;
         case 'person':
-          wx.navigateTo({url: '../personalCenter/personalCenter'})
+        util_1.router(getCurrentPages(), '/package/pages/personalCenter/personalCenter')
           break;
         default: break;
     }
@@ -99,8 +100,6 @@ Page({
     })
   },
   goCourseInfo (e) {
-    wx.navigateTo({
-      url: '../info/info?cid=' + e.currentTarget.dataset.cid
-  })
+    util_1.router(getCurrentPages(), '/package/pages/info/info?cid=' + e.currentTarget.dataset.cid)
   }
 })

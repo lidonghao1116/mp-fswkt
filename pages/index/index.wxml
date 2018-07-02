@@ -9,7 +9,7 @@
     <i-tab key="{{ index }}" title="{{ item.name }}" wx:for="{{ groups }}" wx:key="{{ index }}"></i-tab>
   </i-tabs>
   <view class="swiper-box" wx:if="{{selectTabId==0}}">
-    <swiper indicator-dots autoplay circular class="slide-swiper">
+    <swiper indicator-dots autoplay circular class="slide-swiper" indicator-active-color="#3FB67F">
       <block wx:for="{{banners}}" wx:key="url">
         <swiper-item bindtap="tapBanner" data-cid="{{item.cid}}">
           <image src="{{item.img}}" class="slide-image" width="355" height="150"/>

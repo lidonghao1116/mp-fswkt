@@ -1,4 +1,5 @@
 const api = require("./../../../utils/api")
+const util_1 = require("./../../../utils/util")
 
 Page({
   data: {
@@ -17,25 +18,22 @@ Page({
     api.vLog(logData);
   },
   goRecords () {
-    wx.navigateTo({url: '../myCourse/myCourse'})
+    util_1.router(getCurrentPages(), '/package/pages/myCourse/myCourse')
   },
   goCart () {
-    wx.navigateTo({url: '../myCourse/myCourse?tab=1'})
+    util_1.router(getCurrentPages(), '/package/pages/myCourse/myCourse?tab=1')
   },
   gocCupon () {
-    wx.navigateTo({
-      url: '../couponList/couponList'
-    })
+    util_1.router(getCurrentPages(), '/package/pages/couponList/couponList')
   },
   tabBarChange (e) {
     const key = e.detail.key
     switch (key) {
         case 'course':
-          wx.navigateTo({url: '../../../pages/index/index'})
+          util_1.router(getCurrentPages(), '/pages/index/index')
           break;
         case 'learn':
-          console.log('learn')
-          wx.navigateTo({url: '../myCourse/myCourse'})
+          util_1.router(getCurrentPages(), '/package/pages/myCourse/myCourse')
           break;
         default: break;
     }
