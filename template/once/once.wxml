@@ -5,7 +5,7 @@
                 <image src="http://fengsheng-image.oss-cn-shenzhen.aliyuncs.com/sys/share-logo.jpg" class="icon" />
             </view>
             <view class="coupon" wx-if="{{!hasGotCoupon}}"   bindtap="getCoupon1">
-                <view class="item1">丰盛微课堂</view>
+                <view class="item1">丰盛微课</view>
                 <view class="item2">发了一个红包，价值连城</view>
                 <view class="font-lg color-y item3">收到一个</view>
                 <view class="font-lg color-y item4">“全民有文画”的金币礼包</view>
@@ -22,7 +22,7 @@
                 <view>派完为止</view>
             </view>
             <view class="coupon" wx-if="{{hasGotCoupon}}">
-                <view class="item1">丰盛微课堂</view>
+                <view class="item1">丰盛微课</view>
                 <view class="font-md color-y item5">好幸运！3000金币+5颗还魂丹</view>
                 <view class="font-md color-y item6">
                     和五张20元个人提升券

@@ -145,7 +145,7 @@ function setModalCall(me, con = {}) {
 exports.setModalCall = setModalCall;
 let pathConfig = {
     index: '/pages/index/index',
-    info: '/pages/info/info'
+    info: '/package/pages/info/info'
 };
 /**
  * @description 获取需要分享的链接

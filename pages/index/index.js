@@ -24,17 +24,11 @@ Page({
             // 来自页面内转发按钮
             console.log(res.target);
         }
+        let logData = { event: 600 }
+        api.vLog(logData);
         return {
-            title: '丰盛微课堂',
-            path: util_1.getSharePath('info'),
-            success: function (res) {
-                // 转发成功
-                let logData = { event: 600 }
-                api_1.vLog(logData);
-            },
-            fail: function (res) {
-                // 转发失败
-            }
+            title: '丰盛微课',
+            path: util_1.getSharePath('index')
         };
     },
     onLoad (options) {
@@ -56,7 +50,7 @@ Page({
             frontColor: '#000000'
         })
         wx.setNavigationBarTitle({
-            title: '丰盛微课堂'
+            title: '丰盛微课'
           })
         // this.getSystemInfo()
         this.queryGroups().then(() => {

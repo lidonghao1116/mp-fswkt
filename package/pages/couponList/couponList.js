@@ -21,17 +21,12 @@ Page({
             // 来自页面内转发按钮
             console.log(res.target);
         }
+        let logData = { event: 600 }
+        api_1.vLog(logData);
         return {
-            title: storge_1.shareTitle,
-            path: util_1.getSharePath(),
-            success: function (res) {
-                // 转发成功
-                let logData = { event: '600' };
-                api_1.vLog(logData);
-            },
-            fail: function (res) {
-                // 转发失败
-            }
+          title: '丰盛微课',
+          path: util_1.getSharePath('index'),
+          imageUrl: '../../../static/img/share.png',
         };
     },
     getCoupons: function () {

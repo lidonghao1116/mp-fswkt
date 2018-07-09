@@ -18,7 +18,7 @@
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#ffffff",
-        "navigationBarTitleText": "丰盛微课堂",
+        "navigationBarTitleText": "丰盛微课",
         "navigationBarTextStyle": "black"
     },
     "networkTimeout": {

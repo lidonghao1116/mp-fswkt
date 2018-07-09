@@ -5,7 +5,7 @@
                 <image src="http://fengsheng-image.oss-cn-shenzhen.aliyuncs.com/sys/share-logo.jpg" class="icon" />
             </view>
             <view class="coupon" bindtap="openPacket" data-act-id="{{ actId }}" data-grant-type="{{ grantType }}">
-                <view class="item1">丰盛微课堂</view>
+                <view class="item1">丰盛微课</view>
                 <view class="item2">发了一个红包，价值连城</view>
                 <view class="font-lg color-y item3">正在派现金红包</view>
                 <view class="font-lg color-y item4">快来领！</view>

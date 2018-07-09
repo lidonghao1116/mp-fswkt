@@ -117,18 +117,12 @@ Page({
             // 来自页面内转发按钮
             console.log(res.target);
         }
+        let logData = { event: 600 }
+        api_1.vLog(logData);
         return {
             title: this.data.course.title,
-            path: util_1.getSharePath('info', { cid: this.data.id }),
-            success: function (res) {
-                // 转发成功
-                let logData = { event: 600 }
-                api_1.vLog(logData);
-            },
-            fail: function (res) {
-                // 转发失败
-            }
-        };
+            path: util_1.getSharePath('info', { cid: this.data.id })
+        }
     },
     /**
      * @description 获取所有可用优惠券

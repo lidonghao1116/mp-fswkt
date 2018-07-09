@@ -8,7 +8,21 @@ Page({
     user: {},
     lesson: {},
   },
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+        // 来自页面内转发按钮
+        console.log(res.target);
+    }
+    let logData = { event: 600 }
+    api.vLog(logData);
+    return {
+      title: '丰盛微课',
+      path: util_1.getSharePath('index'),
+      imageUrl: '../../../static/img/share.png',
+    };
+  },
   onLoad () {
+    console.log(util_1.getSharePath('index'))
     if (!app.globalData.userInfo || !wx.getStorageSync(storge_1.TOKEN)) 
       util_1.router(getCurrentPages(), '/package/pages/auth/auth')
     else {

@@ -1,6 +1,5 @@
 const storge = require("../../../utils/storge")
 const api = require("../../../utils/api")
-const util_1 = require("../../../utils/util")
 const app = getApp()
 
 Page({

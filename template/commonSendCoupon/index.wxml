@@ -5,7 +5,7 @@
         <image src="http://fengsheng-image.oss-cn-shenzhen.aliyuncs.com/sys/share-logo.jpg" class="icon" />
       </view>
       <view class="coupon">
-        <view class="item1">丰盛研习社</view>
+        <view class="item1">丰盛微课</view>
         <view class="font-lg color-y item5">恭喜你！</view>
         <view class="font-lg color-y item6">
             <text>获得</text>
@@ -24,7 +24,7 @@
               <view class="font-ee-sm ellipsis">有效期至： {{endtime}}</view>
           </view>
         </view>
-        <view class="color-y font-extra-sm">可用于购买丰盛研习社任意课程</view>
+        <view class="color-y font-extra-sm">可用于购买丰盛微课任意课程</view>
         <view class="color-y font-extra-sm">每次使用一张</view>
       </view>
       <view class="close-btn" bindtap="closeCommonCoupon"></view>

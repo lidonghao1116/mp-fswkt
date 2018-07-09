@@ -7,7 +7,7 @@ exports.TOKEN = 'token';
 exports.CHANNEL = 'channel';
 exports.littleOsType = 102;
 exports.ostype = 1;
-exports.shareTitle = '丰盛课堂—你的终生学习神器';
+exports.shareTitle = '丰盛微课—你的终生学习神器';
 exports.sharePath = '';
 exports.url = {
     miniLogin: host + 'api/mini/login',
