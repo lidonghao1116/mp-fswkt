@@ -15,7 +15,8 @@ function miniLogin(res) {
             params: Object.assign({}, res, { channel }),
         },
         method: 'POST',
-        dataType: 'json'
+        dataType: 'json',
+        notToken: true
     });
     return re;
 }
@@ -23,16 +24,8 @@ exports.miniLogin = miniLogin;
 
 function queryGroups () {
     
-    let channel = wx.getStorageSync(storge_1.CHANNEL);
     let re = util_1.request({
         url: storge_1.url.queryGroups,
-        data: {
-            head: {
-                ostype: storge_1.ostype,
-                littleOsType: storge_1.littleOsType,
-                channel,
-            }
-        },
         dataType: 'json'
     });
     return re;
@@ -46,17 +39,8 @@ exports.queryGroups = queryGroups;
  */
 function queryBanners() {
     
-    let channel = wx.getStorageSync(storge_1.CHANNEL);
     let re = util_1.request({
         url: storge_1.url.queryBanners,
-        data: {
-            head: {
-                ostype: storge_1.ostype,
-                littleOsType: storge_1.littleOsType,
-                channel,
-            }
-            
-        },
         dataType: 'json'
     });
     return re;
@@ -69,17 +53,10 @@ exports.queryBanners = queryBanners;
  */
 function queryCourses(params) {
     
-    let channel = wx.getStorageSync(storge_1.CHANNEL);
     let re = util_1.request({
         url: storge_1.url.queryCourses,
         data: {
-            ...params,
-            head: {
-                ostype: storge_1.ostype,
-                littleOsType: storge_1.littleOsType,
-                channel,
-            }
-            
+            ...params
         },
         dataType: 'json'
     });
@@ -92,17 +69,10 @@ exports.queryCourses = queryCourses;
  */
 exports.queryCourseByName = function (params) {
     
-    let channel = wx.getStorageSync(storge_1.CHANNEL);
     let re = util_1.request({
         url: storge_1.url.queryCourseByName,
         data: {
-            ...params,
-            head: {
-                ostype: storge_1.ostype,
-                littleOsType: storge_1.littleOsType,
-                channel,
-            }
-            
+            ...params
         },
         dataType: 'json'
     });
@@ -112,16 +82,10 @@ exports.queryCourseByName = function (params) {
  * 我的最近学习
  */
 exports.latelyStudy = function (params) {
-    let channel = wx.getStorageSync(storge_1.CHANNEL);
     let re = util_1.request({
         url: storge_1.url.latelyStudy,
         data: {
             ...params,
-            head: {
-                ostype: storge_1.ostype,
-                littleOsType: storge_1.littleOsType,
-                channel,
-            }
         },
         dataType: 'json'
     });
@@ -131,16 +95,10 @@ exports.latelyStudy = function (params) {
  * 我的已购课程
  */
 exports.mycourses = function (params) {
-    let channel = wx.getStorageSync(storge_1.CHANNEL);
     let re = util_1.request({
         url: storge_1.url.mycourses,
         data: {
-            ...params,
-            head: {
-                ostype: storge_1.ostype,
-                littleOsType: storge_1.littleOsType,
-                channel,
-            }
+            ...params
         },
         dataType: 'json'
     });
@@ -154,16 +112,8 @@ exports.mycourses = function (params) {
  */
 function findCourseById(cid) {
     
-    let channel = wx.getStorageSync(storge_1.CHANNEL);
     let re = util_1.request({
         url: storge_1.url.queryCourseById + cid,
-        data: {
-            head: {
-                ostype: storge_1.ostype,
-                littleOsType: storge_1.littleOsType,
-                channel,
-            }    
-        },
         dataType: 'json'
     });
     return re;
@@ -176,17 +126,10 @@ exports.findCourseById = findCourseById;
  */
 function queryChapters(params) {
     
-    let channel = wx.getStorageSync(storge_1.CHANNEL);
     let re = util_1.request({
         url: storge_1.url.queryChapters.replace('{cid}', params.cid),
         data: {
-            params,
-            head: {
-                ostype: storge_1.ostype,
-                littleOsType: storge_1.littleOsType,
-                channel
-            },
-            
+            params
         },
         dataType: 'json'
     });
@@ -201,17 +144,10 @@ exports.queryChapters = queryChapters;
  */
 function createOrder(params) {
     
-    let channel = wx.getStorageSync(storge_1.CHANNEL);
     let re = util_1.request({
         url: storge_1.url.createOrder,
         data: {
-            params,
-            head: {
-                ostype: storge_1.ostype,
-                littleOsType: storge_1.littleOsType,
-                channel
-            },
-            
+            params
         },
         method: 'POST',
         dataType: 'json'
@@ -241,16 +177,10 @@ exports.createOrder = createOrder;
  */
 function vLog(params) {
     
-    let channel = wx.getStorageSync(storge_1.CHANNEL);
     let re = util_1.request({
         url: storge_1.url.logVist,
         data: {
-            params: [params],
-            head: {
-                ostype: storge_1.ostype,
-                littleOsType: storge_1.littleOsType,
-                channel
-            }
+            params: [params]
         },
         method: 'POST',
         dataType: 'json'
@@ -260,16 +190,10 @@ function vLog(params) {
 exports.vLog = vLog;
 exports.courseFinish = function(params) {
     
-    let channel = wx.getStorageSync(storge_1.CHANNEL);
     let re = util_1.request({
         url: storge_1.url.courseFinish.replace('{cid_chid}', params.cid + '/' + params.ch_id),
         data: {
-            ...params,
-            head: {
-                ostype: storge_1.ostype,
-                littleOsType: storge_1.littleOsType,
-                channel
-            }
+            ...params
         },
         dataType: 'json'
     });
@@ -282,14 +206,8 @@ exports.courseFinish = function(params) {
  */
 function mycoupons() {
     
-    let channel = wx.getStorageSync(storge_1.CHANNEL);
     let re = util_1.request({
         url: storge_1.url.mycoupons,
-        data: {
-            ostype: storge_1.ostype,
-            littleOsType: storge_1.littleOsType,
-            channel
-        },
         dataType: 'json'
     });
     return re;
@@ -301,16 +219,10 @@ exports.mycoupons = mycoupons;
  * @return {Promise}
  */
 function grantCoupon(params) {
-    let channel = wx.getStorageSync(storge_1.CHANNEL);
     let re = util_1.request({
         url: storge_1.url.grantCoupon,
         data: {
-            ...params,
-            head: {
-                ostype: storge_1.ostype,
-                littleOsType: storge_1.littleOsType,
-                channel
-            }
+            ...params
         },
         dataType: 'json'
     });
@@ -324,16 +236,10 @@ exports.grantCoupon = grantCoupon
  */
 function checkValidAct(params = []) {
     
-    let channel = wx.getStorageSync(storge_1.CHANNEL);
     let re = util_1.request({
         url: storge_1.url.checkValidAct,
         data: {
-            ...params,
-            head: {
-                ostype: storge_1.ostype,
-                littleOsType: storge_1.littleOsType,
-                channel
-            }
+            ...params
         },
         dataType: 'json'
     });

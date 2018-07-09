@@ -1,7 +1,6 @@
 /// <reference path="../../wxAPI.d.ts"/>
 import { getParams, getSharePath, formatDayTime } from './../../utils/util'
 import { queryBanners, queryCourses, vLog, getValidActivity, grantCoupon, checkValidAct ,addLittleTemplateMsg} from './../../utils/api'
-import { config } from '../../app'
 import { shareTitle, sharePath } from './../../utils/storge'
 
 interface indexDataM {

@@ -1,11 +1,11 @@
-<scroll-view class="container" style="height:{{scrollH}}px;" scroll-y  bindscrolltolower="lower" scroll-with-animation wx:if="{{!showAuth}}">
+<scroll-view class="container" scroll-y  bindscrolltolower="lower" scroll-with-animation wx:if="{{ init }}">
   <view class="search-box">
     <view class="search" bindtap="goSearch">
       <icon type="search" size="15"/>
       好课程都在这里
     </view>
   </view>
-  <i-tabs current="{{ selectTabId }}" bindchange="tabChange" color="#3FB67F">
+  <i-tabs current="{{ selectTabId }}" bindchange="tabChange" color="#3FB67F" class="i-tabs">
     <i-tab key="{{ index }}" title="{{ item.name }}" wx:for="{{ groups }}" wx:key="{{ index }}"></i-tab>
   </i-tabs>
   <view class="swiper-box" wx:if="{{selectTabId==0}}">
@@ -44,12 +44,7 @@
   </view>
 
 </scroll-view>
-<view class="auth" style="height: {{scrollH}}px; width: {{scrollW}}px" wx:else>
-  <image src="../../static/img/welcome1.png" class="welcome1" />
-  <image src="../../static/img/welcome2.jpg" class="welcome2" />
-  <button open-type="getUserInfo" hover-class="hover-auth-btn" lang="zh_CN" bindgetuserinfo="onGotUserInfo">开 始</button>
-</view>
-<i-tab-bar current="course" bindchange="tabBarChange" fixed wx:if="{{!showAuth}}">
+<i-tab-bar current="course" bindchange="tabBarChange" fixed wx:if="{{ init }}">
     <i-tab-bar-item key="course" image="../../static/img/tab-course.png" selected-image="../../static/img/tab-course-active.png" title="课程"></i-tab-bar-item>
     <i-tab-bar-item key="learn" image="../../static/img/tab-my-learn.png" selected-image="../../static/img/tab-my-learn-active.png" title="我的学习"></i-tab-bar-item>
     <i-tab-bar-item key="person" image="../../static/img/tab-person.png" selected-image="../../static/img/tab-person-active.png" title="个人中心"></i-tab-bar-item>

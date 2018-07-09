@@ -5,12 +5,16 @@ const util_1 = require("./../../../utils/util");
 const api_1 = require("./../../../utils/api");
 const storge_1 = require("./../../../utils/storge");
 
+const app = getApp()
 Page({
     data: {
         couponList: [],
     },
-    onShow() {
-        this.getCoupons();
+    onLoad (options) {
+        if (!app.globalData.userInfo || !wx.getStorageSync(storge_1.TOKEN)) 
+            util_1.router(getCurrentPages(), '/package/pages/auth/auth')
+        else 
+            this.getCoupons()
     },
     onShareAppMessage: function (res) {
         if (res.from === 'button') {
@@ -32,9 +36,9 @@ Page({
     },
     getCoupons: function () {
         api_1.mycoupons().then(res => {
-            if (res.record) {
+            if (res.data.record) {
                 const newList = []
-                res.record.forEach(ele => {
+                res.data.record.forEach(ele => {
                     ele.endTime = util_1.formatDayTime(new Date(ele.endTime));
                     /** 转化需要的字段 end */
                     newList.push(ele);

@@ -1,3 +1,4 @@
+<scroll-view style="height: calc(100vh - 50px)" scroll-y scroll-with-animation>
 <view class="tabs">
   <i-tabs current="{{ selectTabId }}" bindchange="tabChange" color="#3FB67F">
     <i-tab key="{{ index }}" title="{{ item.name }}" wx:for="{{ list }}" wx:key="{{ index }}"></i-tab>
@@ -24,14 +25,14 @@
         <view class="font-sm ellipsis one bold color-g3">{{item.course.title}}</view>
         <view class="color-g6 font-extra-sm ellipsis two">{{item.course.slogo}}</view>
         <view class="font-extra-sm bottomBox">
-          <text class="mgr76 color-g3">{{item.course.orderNum}}人在学</text>
-          <text class="color-r" wx-if="{{item.course.price != 0}}">￥{{item.course.price/100}}</text>
-          <text class="themeColor" wx-if="{{item.course.price == 0}}">免费</text>
+          <text class="mgr76 color-g3" wx:if="{{ selectTabId === 0 }}">学习时间：{{item.lessonTime}}</text>
+          <text class="mgr76 color-g3" wx:else>{{item.course.orderNum}}人在学</text>
         </view>
       </view>
     </view>
   </view>
 </view>
+</scroll-view>
 <i-tab-bar current="learn" bindchange="tabBarChange" fixed>
   <i-tab-bar-item key="course" image="../../static/img/tab-course.png" selected-image="../../static/img/tab-course-active.png" title="课程"></i-tab-bar-item>
   <i-tab-bar-item key="learn" image="../../static/img/tab-my-learn.png" selected-image="../../static/img/tab-my-learn-active.png" title="我的学习"></i-tab-bar-item>

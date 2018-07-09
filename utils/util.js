@@ -78,8 +78,13 @@ exports.getParams = getParams;
  * @return {Promise}
  */
 function request(params) {
-    let TOKEN = wx.getStorageSync(storge_1.TOKEN);
-    params.data.shopid = 1010
+    let TOKEN = wx.getStorageSync(storge_1.TOKEN)
+    if (!TOKEN && params.notToken !== true) {
+        router([], '/package/pages/auth/auth')
+        return
+    }
+    params.data = params.data || {}
+    params.data.shopid = 1003
     return new Promise((resolve, reject) => {
         wx.showLoading({
             title: '加载中...',
@@ -89,7 +94,10 @@ function request(params) {
             url: params.url,
             data: params.data,
             header: {
-                TOKEN
+                TOKEN,
+                channel: wx.getStorageSync(storge_1.CHANNEL),
+                ostype: storge_1.ostype,
+                littleOsType: storge_1.littleOsType
             },
             method: params.method || 'GET',
             dataType: params.dataType || 'json',
@@ -164,11 +172,10 @@ exports.getSharePath = getSharePath;
 export function router(pageStack, url) {
     let index // url 在 页面栈中的位置
     const len = pageStack.length // 当前页面栈长度
-    console.log(pageStack)
     const MAX_PAGESTACK_LEN = 10 // 最大页面栈长度
     for (let i = 0; i < len; i++) {
         if ('/' + pageStack[i].route === url) {
-            index = i + 1
+            index = i
             break
         }
     }
@@ -186,7 +193,7 @@ export function router(pageStack, url) {
         }
     } else {
         wx.navigateBack({
-            delta: len - index
+            delta: len - 1 - index
         });
     }
 }

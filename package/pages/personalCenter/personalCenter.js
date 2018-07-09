@@ -1,5 +1,7 @@
 const api = require("./../../../utils/api")
 const util_1 = require("./../../../utils/util")
+const storge_1 = require("./../../../utils/storge")
+const app = getApp()
 
 Page({
   data: {
@@ -7,15 +9,19 @@ Page({
     lesson: {},
   },
   onLoad () {
-    api.mycourses().then(res => {
-      this.setData({
-        user: res.user,
-        lesson: res.lessonBean
+    if (!app.globalData.userInfo || !wx.getStorageSync(storge_1.TOKEN)) 
+      util_1.router(getCurrentPages(), '/package/pages/auth/auth')
+    else {
+      api.mycourses().then(res => {
+        this.setData({
+          user: res.data.user,
+          lesson: res.data.lessonBean
+        })
       })
-    })
 
-    let logData = { event: 300  }
-    api.vLog(logData);
+      let logData = { event: 300  }
+      api.vLog(logData)
+    }
   },
   goRecords () {
     util_1.router(getCurrentPages(), '/package/pages/myCourse/myCourse')

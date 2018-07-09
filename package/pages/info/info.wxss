@@ -8,9 +8,9 @@ page {
     box-sizing: border-box;
 }
 
-.height-fixed {
+/* .height-fixed {
     height: 100%;
-}
+} */
 
 
 /** 音视频播放 start*/
@@ -63,8 +63,8 @@ page {
 }
 
 .course-main .course-info {
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
 }
 
 .course-main .head {
@@ -185,7 +185,10 @@ page {
 /*导航 end*/
 
 .container-main {
-    height: calc(100% - 490rpx);
+    /* height: calc(100% - 90rpx); */
+    /* margin-bottom: 240rpx; */
+    /* height:100%; */
+
 }
 
 

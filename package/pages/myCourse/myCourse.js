@@ -1,9 +1,11 @@
 const api = require("./../../../utils/api")
 const util_1 = require("./../../../utils/util")
+const storge_1 = require("./../../../utils/storge")
 
-const tabData = {}
+let tabData = {}
 const start = {}
 const end = {}
+const app = getApp()
 
 Page({
   data: {
@@ -13,14 +15,19 @@ Page({
     isSearched: false
   },
   onLoad (options) {
-    const selectTabId = options.tab || 0
-    this.setData({
-      selectTabId
-    })
-    if (Number(selectTabId) === 1)
-      this.myCourses()
-    else
-      this.latelyStudy()
+    if (!app.globalData.userInfo || !wx.getStorageSync(storge_1.TOKEN)) 
+      util_1.router(getCurrentPages(), '/package/pages/auth/auth')
+    else {
+      tabData = {}
+      const selectTabId = options.tab || 0
+      this.setData({
+        selectTabId
+      })
+      if (Number(selectTabId) === 1)
+        this.myCourses()
+      else
+        this.latelyStudy()
+    }
   },
   tabBarChange (e) {
     const key = e.detail.key
@@ -83,18 +90,18 @@ Page({
   },
   myCourses () {
     api.mycourses().then(res => {
-      tabData['1'] = res.courses
+      tabData['1'] = res.data.courses
       this.setData({
-        courses: res.courses,
+        courses: res.data.courses,
         isSearched: true
       })
     })
   },
   latelyStudy () {
     api.latelyStudy().then(res => {
-      tabData['0'] = res.record
+      tabData['0'] = res.data.record
       this.setData({
-        courses: res.record,
+        courses: res.data.record,
         isSearched: true
       })
     })

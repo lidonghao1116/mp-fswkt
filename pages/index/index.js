@@ -1,12 +1,13 @@
 "use strict";
 const api = require("./../../utils/api")
 const util_1 = require("./../../utils/util")
-const storge = require("./../../utils/storge");
+const storge_1 = require("./../../utils/storge")
+
 
 let tabData = {}
 const start = {}
 const end = {}
-const app = getApp();
+const app = getApp()
 
 Page({
     data: {
@@ -16,7 +17,7 @@ Page({
         groups: [],
         banners: [],
         courses: [],
-        showAuth: false,
+        init: false
     },
     onShareAppMessage: function (res) {
         if (res.from === 'button') {
@@ -37,77 +38,19 @@ Page({
         };
     },
     onLoad (options) {
-        tabData = {}
-        if (!app.globalData.userInfo) {
-            wx.getSetting({
-              success: res => {
-                if (res.authSetting['scope.userInfo']) {
-                  this.login()
-                } else {
-                    wx.setNavigationBarColor({
-                        backgroundColor : '#bdb5c2',
-                        frontColor: '#ffffff'
-                    })
-                    var res = wx.getSystemInfoSync()
-                    this.setData({
-                        scrollH: res.windowHeight - 40,
-                        scrollW: res.windowWidth
-                    })
-                    this.setData({
-                        showAuth: true
-                    })
-                }
-              }
-            })
-        } else {
-            this.init()
-        }
-        //   let params = util_1.getParams(options);
-        //   this.setData({ params });
-
-        
+        if (!app.globalData.userInfo || !wx.getStorageSync(storge_1.TOKEN)) 
+            util_1.router(getCurrentPages(), '/package/pages/auth/auth')
+        else 
+            this.preInit()
     },
-    onGotUserInfo: function (e) {
-        if (e.detail.userInfo) {
-          this.login()
-        } else {
-          wx.openSetting({
-            success: res => {
-              if (res.authSetting['scope.userInfo']) {
-                this.login()
-              } else {
-                wx.showToast({
-                  title: '微信授权失败',
-                  icon: 'none'
-                })
-              }
-            }
-          })
-          
-        }
-      },
-      login: function () {
-        //调用登录接口
-        wx.login({
-          success: data => {
-            let code = data.code;
-            wx.getUserInfo({
-              success: res => {
-                app.globalData.userInfo = res.userInfo;
-                res.code = code;
-                api.miniLogin(res).then(res => {
-                  wx.setStorageSync(storge.TOKEN, res.token);
-                  this.init()
-                });
-              }
-            });
-          }
-        });
-      },
-    init: function (options) {
+    preInit () {
+        tabData = {}
         this.setData({
-            showAuth: false
+            init: true
         })
+        this.init()
+    },
+    init: function (options) {
         wx.setNavigationBarColor({
             backgroundColor : '#ffffff',
             frontColor: '#000000'
@@ -115,7 +58,7 @@ Page({
         wx.setNavigationBarTitle({
             title: '丰盛微课堂'
           })
-        this.getSystemInfo()
+        // this.getSystemInfo()
         this.queryGroups().then(() => {
             this.setData({
                 groupId: this.data.groups[0].id
@@ -139,15 +82,15 @@ Page({
             default: break;
         }
     },
-    getSystemInfo () {
-        wx.getSystemInfo({
-            success: (res) => {
-                this.setData({
-                    scrollH: res.windowHeight - 50 // 底部tabbar高度
-                });
-            }
-        })
-    },
+    // getSystemInfo () {
+    //     wx.getSystemInfo({
+    //         success: (res) => {
+    //             this.setData({
+    //                 scrollH: res.windowHeight - 50 // 底部tabbar高度
+    //             });
+    //         }
+    //     })
+    // },
     touchstart (e) {
         start.x = e.changedTouches[0].pageX
         start.y = e.changedTouches[0].pageY
@@ -208,7 +151,7 @@ Page({
     queryBanner () {
         api.queryBanners().then(res => {
             this.setData({
-                banners: res.obj.filter(banner => banner.cid && !banner.url)
+                banners: res.data.filter(banner => banner.cid && !banner.url)
             })
         })
     },
@@ -233,13 +176,13 @@ Page({
         }).then(res => {
             
             let courses = tabData[groupId].courses || []
-            courses = courses.concat(res.record)
+            courses = courses.concat(res.data.record)
 
             tabData[groupId].courses = courses
             this.setData({courses})
 
             tabData[groupId].pageno = tabData[groupId].pageno + 1
-            tabData[groupId].pageCount = res.pageCount
+            tabData[groupId].pageCount = res.data.pageCount
         })
     }
 });

@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 // const host = 'http://192.168.1.15:8081/';
-const host = 'https://xuexi-dev.fsstudy.com/';
+const host = 'https://lesson.fsstudy.com/';
 
 exports.TOKEN = 'token';
 exports.CHANNEL = 'channel';
 exports.littleOsType = 102;
 exports.ostype = 1;
-exports.shareTitle = '丰盛微课堂—你的终生学习神器';
+exports.shareTitle = '丰盛课堂—你的终生学习神器';
 exports.sharePath = '';
 exports.url = {
     miniLogin: host + 'api/mini/login',

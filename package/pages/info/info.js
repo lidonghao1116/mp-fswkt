@@ -1,9 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /// <reference path="../../../wxAPI.d.ts"/>
-const util_1 = require("./../../../utils/util");
-const api_1 = require("./../../../utils/api");
+const util_1 = require("./../../../utils/util")
+const api_1 = require("./../../../utils/api")
+const storge_1 = require("./../../../utils/storge")
 
+const app = getApp()
 let coupons = undefined // 我的优惠券
 
 const infoConfig = {
@@ -93,17 +95,22 @@ let infoData = {
 Page({
     data: infoData,
     infoConfig,
-    onLoad: function (options) {
-        const params = util_1.getParams(options);
-        this.setData({ id: params.cid });
-        
-        if (params.actId)
-            this.checkValidAct(3, params.actId) // 直接发券
-            
-        this.findCourse()
+    onLoad (options) {
+        if (!app.globalData.userInfo || !wx.getStorageSync(storge_1.TOKEN)) 
+            util_1.router(getCurrentPages(), '/package/pages/auth/auth')
 
-        let logData = { event: 200, cid: params.cid }
-        api_1.vLog(logData);
+        else {
+            const params = util_1.getParams(options);
+            this.setData({ id: params.cid });
+            
+            if (params.actId)
+                this.checkValidAct(3, params.actId) // 直接发券
+                
+            this.findCourse()
+
+            let logData = { event: 200, cid: params.cid }
+            api_1.vLog(logData);
+        }
     },
     onShareAppMessage: function (res) {
         if (res.from === 'button') {
@@ -129,7 +136,7 @@ Page({
      */
     findCoupon: function () {
         return api_1.mycoupons().then(res => {
-            coupons = res.record || []
+            coupons = res.data.record || []
         });
     },
     /**
@@ -148,11 +155,11 @@ Page({
                 else {
                     // 显示红包弹窗
                     this.setData({
-                    couponData: {
-                        actId,
-                        grantType
-                    },
-                    showPacket: true
+                        couponData: {
+                            actId,
+                            grantType
+                        },
+                        showPacket: true
                     })
                 }
                 }
@@ -214,10 +221,10 @@ Page({
      */
     findCourse: function () {
         api_1.findCourseById(Number(this.data.id)).then(res => {
-            let course = res.course;
-            let tutor = res.tutor;
-            let chapters = res.chapters;
-            let isOrdered = res.isOrdered;
+            let course = res.data.course;
+            let tutor = res.data.tutor;
+            let chapters = res.data.chapters;
+            let isOrdered = res.data.isOrdered;
             let infoImg = JSON.parse(course.introImg);
             /** 转化需要的字段 start */
             course.price = (course.price / 100).toFixed(2);
@@ -242,7 +249,7 @@ Page({
             pagesize: 100,
             cid: this.data.id
         }).then(res => {
-            let chapters = res.record;
+            let chapters = res.data.record;
             me.setData({
                 chapters
             });
@@ -334,17 +341,43 @@ Page({
                         }); //切换音频时需要重新加载下才能完成播放
                         showControls = true;
                     }
-                    if(me.MediaContext) me.MediaContext.seek(0)
+                    // if(me.MediaContext) me.MediaContext.seek(0)
                     me.setData({ showControls, mediaSrc, playStatus, playId, pauseId, mediaName, sliderVal, vlogplaying: false })
                     
+                    let lastPlayTime = undefined
+                    lastPlayTime = wx.getStorageSync(this.data.id + '_' + id)
+
                     if (playStatus == 3) {
-                        me.MediaContext = wx.createAudioContext('myAudio');
+                        // me.MediaContext = wx.createAudioContext('myAudio');
+                        if (me.MediaContext) me.MediaContext.destroy()
+                        me.MediaContext = wx.createInnerAudioContext()
+                        me.MediaContext.autoplay = true
+                        me.MediaContext.src = mediaSrc
+                        lastPlayTime && (me.MediaContext.startTime = lastPlayTime)
+                        // startTime = 
+                        me.MediaContext.onPlay(this.mediaPlay)
+                        me.MediaContext.onPause(this.mediaPause)
+                        me.MediaContext.onTimeUpdate(this.audioTimeupdate)
+                        me.MediaContext.onEnded(this.ended)
+                        me.MediaContext.onError((res) => {
+                            wx.showModal({title: res.errMsg})
+                            console.log(res.errMsg)
+                            console.log(res.errCode)
+                        })
                     }
                     else {
                         me.MediaContext = wx.createVideoContext('myVideo');
+                        me.MediaContext.play()
+                        lastPlayTime && me.MediaContext.seek(lastPlayTime)
+                        
                     }
-                    me.play();
-                    me.MediaContext.seek(wx.getStorageSync(this.data.id + '_' + id))
+                    
+                    // console.log('播放时获取前一次播放时间', this.data.id + '_' + id, lastPlayTime)
+                    // if (lastPlayTime){
+                        // wx.showModal({title: lastPlayTime+''})
+                        // me.MediaContext.startTime = 11
+                        // me.MediaContext.seek(lastPlayTime)
+                    // }
                     let logData = { event: 500, cid: this.data.id, ch_id: id }
                     api_1.vLog(logData);
                     return;
@@ -357,6 +390,10 @@ Page({
      * @return {void}
      */
     mediaPlay: function () {
+        
+        wx.setKeepScreenOn({
+            keepScreenOn: true
+        })
         let playId = this.data.pauseId;
         this.setData({ playId});
         if (!this.data.vlogplayingPause) {
@@ -370,6 +407,9 @@ Page({
      * @return {void}
      */
     mediaPause: function () {
+        wx.setKeepScreenOn({
+            keepScreenOn: false
+        })
         let playId = 0;
         this.setData({ playId });
         this.setData({ vlogplayingPause: true });
@@ -436,13 +476,7 @@ Page({
         let cur = e.detail.currentTime
         let dur = e.detail.duration 
 
-        wx.setStorage({
-            key: this.data.id + '_' + this.data.chapters[this.data.curPlayChapterIndex].chId,
-            data: cur,
-            fail(e) {
-                console.log(e)
-            }
-        })
+        wx.setStorageSync(this.data.id + '_' + this.data.chapters[this.data.curPlayChapterIndex].chId, cur)
 
         if (!this.data.vlogplaying && cur >= (dur * 0.8)) {
             this.setData({vlogplaying: true})
@@ -460,19 +494,19 @@ Page({
      * @param {Event} e
      * @return {void}
      */
-    audioTimeupdate: function (e) {
+    audioTimeupdate: function () {
+        const audio = this.MediaContext
+
+
+        // console.log(1)
         let me = this, sliderVal;
-        let cur = e.detail.currentTime;
-        let dur = e.detail.duration;
+        let cur = audio.currentTime;
+        let dur = audio.duration;
         let currentTime = util_1.formatSecond(Math.floor(cur));
         let duration = util_1.formatSecond(Math.floor(dur));
-        wx.setStorage({
-            key: this.data.id + '_' + this.data.chapters[this.data.curPlayChapterIndex].chId,
-            data: cur,
-            fail(e) {
-                console.log(e)
-            }
-        })
+
+        // console.log('设置当前播放进度', this.data.id + '_' + this.data.chapters[this.data.curPlayChapterIndex].chId, wx.getStorageSync(this.data.id + '_' + this.data.chapters[this.data.curPlayChapterIndex].chId))
+        wx.setStorageSync(this.data.id + '_' + this.data.chapters[this.data.curPlayChapterIndex].chId, cur)
 
         if (!this.data.vlogplaying && cur >= (dur * 0.8)) {
             this.setData({vlogplaying: true})
@@ -600,14 +634,14 @@ Page({
             cid: Number(me.data.id), 
             coupon_id: this.data.currentCoupon.id
         }).then(res => {
-            if (res.errCode === 1) {
+            if (res.errorCode !== 1) {
                 wx.showToast({
                     icon: 'none',
                     title: '创建订单失败'
                 })
                 return
             }
-            let obj = res.obj;
+            let obj = res.data;
             let timeStamp = obj.timeStamp;
             let nonceStr = obj.nonceStr;
             let packageStr = obj.packageStr;
@@ -703,7 +737,7 @@ Page({
      * @description 播放完成
      * @return {void}
      */
-    ended: function () {
+    ended: function () {{}
         let logData = { event: 501, cid: this.data.id, ch_id: this.data.id }
         api_1.vLog(logData);
         if (this.data.curPlayChapterIndex === this.data.chapters.length - 1)
@@ -722,6 +756,10 @@ Page({
         this.setData({ showBenefit: false });
     },
     onHide: function () {
+        // wx.showModal({'title': 'aaa'})
+        this.MediaContext && this.MediaContext.pause()
+    },
+    onUnload: function () {
         this.MediaContext && this.MediaContext.pause()
     }
 });

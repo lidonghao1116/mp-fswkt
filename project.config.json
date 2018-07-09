@@ -1,7 +1,10 @@
 {
 	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -9,9 +12,9 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.1.1",
-	"appid": "wx842482d145ee80df",
-	"projectname": "%E4%B8%B0%E7%9B%9B%E5%BE%AE%E8%AF%BE",
-	"isGameTourist": true,
+	"appid": "wxea8dcedf89df0e63",
+	"projectname": "%E4%B8%B0%E7%9B%9B%E5%BE%AE%E8%AF%BE-%E7%94%9F%E4%BA%A7",
+	"isGameTourist": false,
 	"condition": {
 		"search": {
 			"current": -1,
@@ -21,53 +24,13 @@
 			"current": -1,
 			"list": []
 		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
-			"list": [
-				{
-					"id": 0,
-					"name": "详情页",
-					"pathName": "pages/info/info",
-					"query": "cid=1001&actId=1020",
-					"scene": "1014"
-				},
-				{
-					"id": 1,
-					"name": "主页",
-					"pathName": "pages/index/index",
-					"query": "channel=1008",
-					"scene": "1001"
-				},
-				{
-					"id": 2,
-					"name": "主页",
-					"pathName": "pages/index/index",
-					"query": "channel=1008",
-					"scene": "1001"
-				},
-				{
-					"id": 3,
-					"name": "领劵",
-					"pathName": "pages/info/info",
-					"query": "cid=1000?actId=1020",
-					"scene": "1001"
-				},
-				{
-					"id": 4,
-					"name": "领劵",
-					"pathName": "pages/info/info",
-					"query": "cid=1000&actId=1003",
-					"scene": "1001"
-				}
-			]
+			"current": -1,
+			"list": []
 		}
 	}
 }

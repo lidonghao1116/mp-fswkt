@@ -41,6 +41,8 @@ page {
 .container {
     z-index: 9;
     box-sizing: border-box;
+    height: calc(100vh - 50px);
+    /* padding-top:82px; */
 }
 .swiper-box {
     box-sizing: border-box;
@@ -92,7 +94,12 @@ page {
     height: 100%;
     border-radius: 10px;
 }
-
+/* 
+.i-tabs {
+   position:fixed;
+   width:100vw;
+   top:40px;
+} */
 
 /*
   swiper end
@@ -100,6 +107,10 @@ page {
 
 .search-box {
     padding:0 16px;
+    /* position:fixed;
+    width:100vw;
+    top:0; */
+
 }
 .search {
     background:hsla(0,0%,90%,.4);
@@ -129,38 +140,4 @@ page {
     width: 32rpx;
     height: 32rpx;
     vertical-align:middle;
-}
-
-
-
-.auth {
-    position: relative;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding-top: 40px;
-    background: linear-gradient(#bdb5c2, #fff, rgb(210, 214, 217));
-}
-.auth button {
-    margin-top: 114rpx;
-    width: 210px;
-    background:rgb(51, 42, 48);
-    color:rgb(197, 165, 116);
-    /* position:absolute;
-    bottom: 180px;
-    left:50%;
-    transform:translateX(-50%); */
-}
-.auth .hover-auth-btn {
-    background:rgb(64, 46, 19);
-}
-
-.welcome1 {
-    width: 539rpx;
-    height: 255rpx;
-}
-.welcome2 {
-    margin-top: 48rpx;
-    width: 724rpx;
-    height: 446rpx;
 }

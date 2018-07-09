@@ -4,11 +4,8 @@
     <view class="container-top">
         <view class="video-player">
             <image class="img" src="{{course.titleImg}}" hidden="{{playStatus == 2}}" mode="widthFix"/>
-            <image class="play-img" bindtap="gotoStudy" src="../../../static/img/play-btn.jpg" hidden="{{playStatus == 2}}" mode="widthFix"/>
+            <image class="play-img" bindtap="gotoStudy" src="../../../static/img/play-btn.jpg" hidden="{{playStatus == 2 || playId != 0}}" mode="widthFix"/>
             <video class="video" src="{{mediaSrc}}" autoplay controls wx-if="{{playStatus == 2}}" id="myVideo" bindtimeupdate="videoTimeupdate" bindplay="mediaPlay" bindpause="mediaPause"  bindended="ended"></video>
-           <view class="audio-box"  wx-if="{{playStatus == 3}}">
-                <audio class="audio" src="{{mediaSrc}}" autoplay id="myAudio" bindplay="mediaPlay" bindpause="mediaPause" bindtimeupdate="audioTimeupdate" bindended="ended"></audio>
-            </view>
         </view>
     </view>
     <view class="nav">
@@ -19,7 +16,7 @@
             目录
         </view>
     </view>
-    <scroll-view scroll-y="{{canScroll}}" class="container-main">
+    <scroll-view scroll-y="{{canScroll}}" class="container-main" style="{{showControls ? 'margin-bottom: 170rpx;' : ''}}">
         <view class="theme-padding ver-center container-title">
             <text class="font-sm bold ellipsis title color-g3">{{course.title || ' '}}</text>
             <text class="fr color-g6 font-extra-sm">{{course.orderNum}}人订阅</text>
@@ -92,7 +89,7 @@
     <!-- 播放控制 end -->
     <!-- 底部按钮组 start -->
     <view class="btn-container">
-        <button class="btn more font-sm  themeColor" bindtap="goIndex">更多好课</button>
+        <button class="btn more font-sm themeColor" bindtap="goIndex">更多好课</button>
         <view class="themeColor-bg btn pay font-sm " wx:if="{{!isOrdered && course.price != 0}}" bindtap="pay">
             <text class="">立即购买</text>
             <text class="font-extra-sm">(￥{{course.price}})</text>

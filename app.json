@@ -10,7 +10,8 @@
                 "pages/personalCenter/personalCenter",
                 "pages/info/info",
                 "pages/search/search",
-                "pages/couponList/couponList"
+                "pages/couponList/couponList",
+                "pages/auth/auth"
             ]
         }
     ],

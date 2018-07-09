@@ -1,0 +1,5 @@
+<view class="auth" style="height: {{scrollH}}px; width: {{scrollW}}px">
+  <image src="../../../static/img/welcome1.png" class="welcome1" />
+  <image src="../../../static/img/welcome2.jpg" class="welcome2" />
+  <button open-type="getUserInfo" hover-class="hover-auth-btn" lang="zh_CN" bindgetuserinfo="onGotUserInfo">开 始</button>
+</view>

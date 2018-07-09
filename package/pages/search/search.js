@@ -1,6 +1,8 @@
 "use strict";
 const api = require("./../../../utils/api")
 const util_1 = require("./../../../utils/util")
+const storge_1 = require("./../../../utils/storge")
+const app = getApp()
 
 Page({
   data: {
@@ -8,6 +10,10 @@ Page({
     default: '',
     courses: [],
     isSearched: false
+  },
+  onLoad () {
+    if (!app.globalData.userInfo || !wx.getStorageSync(storge_1.TOKEN)) 
+      util_1.router(getCurrentPages(), '/package/pages/auth/auth')
   },
   clearInput () {
     this.setData({
@@ -32,6 +38,7 @@ Page({
     }
   },
   hotwordSearch (e) {
+    if (!e.target.id) return
     this.setData({
       default: e.target.id,
       btnText: '取消'
@@ -58,7 +65,7 @@ Page({
       name
     }).then(res => {
       let courses = this.data.courses
-      courses = courses.concat(res.record)
+      courses = courses.concat(res.data.record)
       this.setData({
         courses,
         isSearched: true
