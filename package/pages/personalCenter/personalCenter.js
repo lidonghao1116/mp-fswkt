@@ -22,23 +22,26 @@ Page({
     };
   },
   onLoad () {
-    console.log(util_1.getSharePath('index'))
-    if (!app.globalData.userInfo || !wx.getStorageSync(storge_1.TOKEN)) 
-      util_1.router(getCurrentPages(), '/package/pages/auth/auth')
-    else {
-      api.mycourses().then(res => {
-        this.setData({
-          user: res.data.user,
-          lesson: res.data.lessonBean
-        })
-      })
-
-      let logData = { event: 300  }
-      api.vLog(logData)
+    if (!app.globalData.userInfo || !wx.getStorageSync(storge_1.TOKEN)){
+      util_1.loginValidataion(app, () => {
+        this.init()
+      }, () => util_1.router(getCurrentPages(), '/package/pages/auth/auth'))
+    } else {
+      this.init()
     }
   },
+  init () {
+    api.mycourses().then(res => {
+      this.setData({
+        user: res.data.user,
+        lesson: res.data.lessonBean
+      })
+    })
+    let logData = { event: 300  }
+    api.vLog(logData)
+  },
   goRecords () {
-    util_1.router(getCurrentPages(), '/package/pages/myCourse/myCourse')
+    util_1.router(getCurrentPages(), '/package/pages/myCourse/myCourse?tab=0')
   },
   goCart () {
     util_1.router(getCurrentPages(), '/package/pages/myCourse/myCourse?tab=1')
@@ -53,7 +56,7 @@ Page({
           util_1.router(getCurrentPages(), '/pages/index/index')
           break;
         case 'learn':
-          util_1.router(getCurrentPages(), '/package/pages/myCourse/myCourse')
+          util_1.router(getCurrentPages(), '/package/pages/myCourse/myCourse?tab=0')
           break;
         default: break;
     }

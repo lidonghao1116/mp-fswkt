@@ -31,11 +31,14 @@ Page({
             path: util_1.getSharePath('index')
         };
     },
-    onLoad (options) {
-        if (!app.globalData.userInfo || !wx.getStorageSync(storge_1.TOKEN)) 
-            util_1.router(getCurrentPages(), '/package/pages/auth/auth')
-        else 
+    onLoad () {
+        if (!app.globalData.userInfo || !wx.getStorageSync(storge_1.TOKEN)){
+            util_1.loginValidataion(app, () => {
+                this.preInit()
+            }, () => util_1.router(getCurrentPages(), '/package/pages/auth/auth'))
+        } else {
             this.preInit()
+        }
     },
     preInit () {
         tabData = {}
@@ -68,7 +71,7 @@ Page({
         const key = e.detail.key
         switch (key) {
             case 'learn':
-                util_1.router(getCurrentPages(), '/package/pages/myCourse/myCourse')
+                util_1.router(getCurrentPages(), '/package/pages/myCourse/myCourse?tab=0')
                 break;
             case 'person':
                 util_1.router(getCurrentPages(), '/package/pages/personalCenter/personalCenter')

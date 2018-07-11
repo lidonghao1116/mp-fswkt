@@ -50,14 +50,14 @@ Page({
               const pageStack = getCurrentPages()
               const route = pageStack[pageStack.length - 2]
               let params = ''
-              if (route.options) {
+              if (route && route.options) {
                 Object.keys(route.options).forEach(key => {
                   params += '&' + key + '=' + route.options[key]
                 })
               }
               if (params) params = params.replace('&', '?')
-              wx.redirectTo({
-                url: '/' + route.route + params // 重定向才会触发onLoad
+              wx.reLaunch({
+                url: '/' + route.route + params
               })
             })
           }

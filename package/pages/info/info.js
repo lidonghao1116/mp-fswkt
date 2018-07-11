@@ -96,21 +96,25 @@ Page({
     data: infoData,
     infoConfig,
     onLoad (options) {
-        if (!app.globalData.userInfo || !wx.getStorageSync(storge_1.TOKEN)) 
-            util_1.router(getCurrentPages(), '/package/pages/auth/auth')
-
-        else {
-            const params = util_1.getParams(options);
-            this.setData({ id: params.cid });
-            
-            if (params.actId)
-                this.checkValidAct(3, params.actId) // 直接发券
-                
-            this.findCourse()
-
-            let logData = { event: 200, cid: params.cid }
-            api_1.vLog(logData);
+        if (!app.globalData.userInfo || !wx.getStorageSync(storge_1.TOKEN)){
+            util_1.loginValidataion(app, () => {
+                this.init(options)
+            }, () => util_1.router(getCurrentPages(), '/package/pages/auth/auth'))
+        } else {
+            this.init(options)
         }
+    },
+    init (options) {
+        const params = util_1.getParams(options);
+        this.setData({ id: params.cid });
+        
+        if (params.actId)
+            this.checkValidAct(3, params.actId) // 直接发券
+            
+        this.findCourse()
+
+        let logData = { event: 200, cid: params.cid }
+        api_1.vLog(logData);
     },
     onShareAppMessage: function (res) {
         if (res.from === 'button') {

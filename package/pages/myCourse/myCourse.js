@@ -28,30 +28,35 @@ Page({
     };
   },
   onLoad (options) {
-    if (!app.globalData.userInfo || !wx.getStorageSync(storge_1.TOKEN)) 
-      util_1.router(getCurrentPages(), '/package/pages/auth/auth')
-    else {
-      tabData = {}
-      const selectTabId = options.tab || 0
-      this.setData({
-        selectTabId
-      })
-      if (Number(selectTabId) === 1)
-        this.myCourses()
-      else
-        this.latelyStudy()
+    if (!app.globalData.userInfo || !wx.getStorageSync(storge_1.TOKEN)){
+      util_1.loginValidataion(app, () => {
+        this.init(options)
+      }, () => util_1.router(getCurrentPages(), '/package/pages/auth/auth'))
+    } else {
+      this.init(options)
     }
+  },
+  init (options) {
+    tabData = {}
+    const selectTabId = options.tab || 0
+    this.setData({
+      selectTabId
+    })
+    if (Number(selectTabId) === 1)
+      this.myCourses()
+    else
+      this.latelyStudy()
   },
   tabBarChange (e) {
     const key = e.detail.key
     switch (key) {
-        case 'course':
-          util_1.router(getCurrentPages(), '/pages/index/index')
-          break;
-        case 'person':
-        util_1.router(getCurrentPages(), '/package/pages/personalCenter/personalCenter')
-          break;
-        default: break;
+      case 'course':
+        util_1.router(getCurrentPages(), '/pages/index/index')
+        break;
+      case 'person':
+      util_1.router(getCurrentPages(), '/package/pages/personalCenter/personalCenter')
+        break;
+      default: break;
     }
   },
   tabChange (e) {

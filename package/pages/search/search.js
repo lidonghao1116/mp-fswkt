@@ -12,8 +12,9 @@ Page({
     isSearched: false
   },
   onLoad () {
-    if (!app.globalData.userInfo || !wx.getStorageSync(storge_1.TOKEN)) 
-      util_1.router(getCurrentPages(), '/package/pages/auth/auth')
+    if (!app.globalData.userInfo || !wx.getStorageSync(storge_1.TOKEN)){
+        util_1.loginValidataion(app, null, () => util_1.router(getCurrentPages(), '/package/pages/auth/auth'))
+    }
   },
   onShareAppMessage: function (res) {
     if (res.from === 'button') {

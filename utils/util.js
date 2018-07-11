@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const storge_1 = require("./storge");
+const api = require("./api");
 /**
  * @description 将小于十的数转为 0n
  * @param {Number} n
@@ -167,7 +168,39 @@ function getSharePath(page = 'index', params = {}) {
     }
     return path;
 }
-exports.getSharePath = getSharePath;
+exports.getSharePath = getSharePath
+
+/**
+ * 
+ * @param {*} app 小程序实例
+ * @param {*} success 已经允许授权登录的回调
+ * @param {*} fail 没有允许授权登录的回调
+ */
+export function loginValidataion(app, success, fail) {
+    wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            wx.login({
+                success: data => {
+                  let code = data.code;
+                  wx.getUserInfo({
+                    success: res => {
+                        app.globalData.userInfo = res.userInfo
+                        res.code = code;
+                        api.miniLogin(res).then(res => {
+                            wx.setStorageSync(storge_1.TOKEN, res.data.token)
+                            success && success()
+                        })
+                    }
+                  })
+                }
+            })
+          } else {
+            fail()
+          }
+        }
+      })
+}
 
 export function router(pageStack, url) {
     let index // url 在 页面栈中的位置

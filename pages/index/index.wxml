@@ -31,8 +31,8 @@
           <image src="{{item.tutor.headImgUrl}}"  />
         </view>
         <view class="main">
-          <view class="font-sm ellipsis one bold color-g3">{{item.course.title}}</view>
-          <view class="color-g6 font-extra-sm ellipsis two">{{item.course.slogo}}</view>
+          <view class="font-sm ellipsis one bold color-g3 course-title">{{item.course.title}}</view>
+          <view class="color-g6 font-extra-sm ellipsis two course-sub-title">{{item.course.slogo}}</view>
           <view class="font-extra-sm bottomBox">
             <text class="mgr76 color-g3">{{item.course.orderNum}}人在学</text>
             <text class="color-r" wx-if="{{item.course.price != 0}}">￥{{item.course.price/100}}</text>

@@ -105,7 +105,10 @@ page {
 .course-main .course-list .list-main {
     height: 90rpx;
     padding-right: 30rpx;
-    position: relative;
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+    /* position: relative; */
 }
 
 .course-main .course-list .list-main .title {
@@ -196,7 +199,7 @@ page {
 
 .container-title .title {
     display: inline-block;
-    width: 560rpx;
+    /* width: 560rpx; */
     vertical-align: middle;
 }
 

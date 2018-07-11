@@ -10,11 +10,14 @@ Page({
     data: {
         couponList: [],
     },
-    onLoad (options) {
-        if (!app.globalData.userInfo || !wx.getStorageSync(storge_1.TOKEN)) 
-            util_1.router(getCurrentPages(), '/package/pages/auth/auth')
-        else 
+    onLoad () {
+        if (!app.globalData.userInfo || !wx.getStorageSync(storge_1.TOKEN)){
+            util_1.loginValidataion(app, () => {
+                this.getCoupons()
+            }, () => util_1.router(getCurrentPages(), '/package/pages/auth/auth'))
+        } else {
             this.getCoupons()
+        }
     },
     onShareAppMessage: function (res) {
         if (res.from === 'button') {

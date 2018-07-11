@@ -166,6 +166,12 @@ image {
     width: 480rpx;
     height: 100%;
 }
+.course-title {
+    height: 40rpx;
+}
+.course-sub-title {
+    height: 34rpx;
+}
 
 .course-box .course-list .course-info .two {
     width: 460rpx;
